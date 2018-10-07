@@ -1,0 +1,16 @@
+.hero-block {
+    height: 100vh;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    background-image: url('/assets/images/hero-img.jpg');
+    background-size: cover;
+}
+
+.hero-container {
+    padding: 2em;
+    background: rgba(255,255,255, 0.7);
+    margin: 1em;
+}
