@@ -23,6 +23,7 @@
     "core-js": "^2.5.4",
     "gulp": "^3.9.1",
     "gulp-cli": "^2.0.1",
+    "ng2-semantic-ui": "^0.9.7",
     "rxjs": "~6.2.0",
     "semantic-ui": "^2.4.0",
     "zone.js": "~0.8.26"
