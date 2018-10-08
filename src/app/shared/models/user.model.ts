@@ -5,7 +5,7 @@ export class User {
     email: string;
     password?: string;
     avatar: string;
-    vehicles: Array<Vehicle>;
+    vehicles: Array<Vehicle> = [];
     createdAt?: Date;
     updatedAt?: Date;
 }
