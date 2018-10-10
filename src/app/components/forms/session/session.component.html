@@ -1,5 +1,11 @@
-<form class="ui large form" (ngSubmit)="onSubmitLogIn(loginForm)" #loginForm="ngForm">
-    <div class="ui stacked segment">
+<main class="ui container">
+
+  <!--#f2f2f2-->
+
+  
+  <form class="ui large form" (ngSubmit)="onSubmitLogIn(loginForm)" #loginForm="ngForm">
+    <div class="ui raised segment">
+      <p class="ui huge teal header center aligned">Log in</p>
       <div class="field">
         <div class="ui left icon input">
           <i class="mail icon"></i>
@@ -15,5 +21,6 @@
       <button type="submit" class="ui fluid large teal submit button">Sign up</button>
     </div>
     <div class="ui error message"></div>
-
   </form>
+</main>
+

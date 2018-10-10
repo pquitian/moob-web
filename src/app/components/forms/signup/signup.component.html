@@ -1,5 +1,9 @@
+<main class="ui container">
+
+
 <form class="ui large form" (ngSubmit)="onSubmitSignUp(signupForm)" #signupForm="ngForm">
-    <div class="ui stacked segment">
+    <div class="ui raised segment">
+        <p class="ui huge teal header center aligned">Sign up</p>
       <div class="field" [ngClass]="{ 'error' : apiError || name.errors && name.touched }">
         <div class="ui left icon input">
           <i class="user icon"></i>
@@ -27,7 +31,8 @@
           Choose a password
         S</div>
       </div>
-      <button type="submit" class="ui fluid large teal submit button" [ngClass]="{ 'disabled' : !signupForm.valid }">Sign up</button>
+      <button type="submit" class="ui fluid large teal submit button" [ngClass]="{ 'disabled' : !signupForm.valid }">Let's go inside!</button>
     </div>
 
   </form>
+</main>
