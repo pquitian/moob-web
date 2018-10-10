@@ -12,6 +12,9 @@ import { HeaderComponent } from './components/common/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { SessionComponent } from './components/forms/session/session.component';
 import { SignupComponent } from './components/forms/signup/signup.component';
+import { MainComponent } from './components/main/main.component';
+import { SearcherComponent } from './components/search/searcher/searcher.component';
+import { SearchListComponent } from './components/search/search-list/search-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { SignupComponent } from './components/forms/signup/signup.component';
     HeaderComponent,
     HomeComponent,
     SessionComponent,
-    SignupComponent
+    SignupComponent,
+    MainComponent,
+    SearcherComponent,
+    SearchListComponent
   ],
   imports: [
     BrowserModule,
