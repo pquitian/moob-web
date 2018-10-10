@@ -1,0 +1,31 @@
+<section class="ui container">
+  <sui-search [optionsLookup]="optionsSearch"
+                optionsField="title"
+                (resultSelected)="last = $event"
+                placeholder="Origin"
+                hasIcon="false">
+  </sui-search>
+  
+  <sui-search [optionsLookup]="optionsSearch"
+                optionsField="title"
+                (resultSelected)="last = $event"
+                placeholder="Destination"
+                hasIcon="false">
+  </sui-search>
+
+  <div class="ui fluid action input">
+      <input placeholder="Departure date"
+             suiDatepicker
+             [(ngModel)]="date"
+             [pickerUseNativeOnMobile]="true">
+  
+      <button class="ui primary icon button" (click)="today()">
+        <i class="checked calendar icon"></i>
+      </button>
+      <button class="ui secondary icon button" (click)="unset()">
+        <i class="remove icon"></i>
+      </button>
+  </div>
+
+</section>
+
