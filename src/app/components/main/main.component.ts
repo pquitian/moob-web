@@ -1,6 +1,7 @@
 import { Commute } from './../../shared/models/commute.model';
 import { SearcherService } from './../../shared/services/searcher.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -10,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
 
   commutes: Commute[] = [];
+  onCommutesChangesSubscription: Subscription;
 
   constructor(private searcherService: SearcherService) { }
 
@@ -17,6 +19,12 @@ export class MainComponent implements OnInit {
     this.searcherService.listAll().subscribe((commutes: Commute[]) => {
       this.commutes = commutes;
     });
+    this.onCommutesChangesSubscription = this.searcherService.onCommutesChanges()
+      .subscribe((commutes: Commute[]) => this.commutes = commutes);
+  }
+
+  ngOnDestroy() {
+    this.onCommutesChangesSubscription.unsubscribe();
   }
 
 }
