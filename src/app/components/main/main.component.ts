@@ -1,3 +1,5 @@
+import { Commute } from './../../shared/models/commute.model';
+import { SearcherService } from './../../shared/services/searcher.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  commutes: Commute[] = [];
+
+  constructor(private searcherService: SearcherService) { }
 
   ngOnInit() {
+    this.searcherService.listAll().subscribe((commutes: Commute[]) => {
+      this.commutes = commutes;
+    });
   }
 
 }

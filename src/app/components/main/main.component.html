@@ -1,3 +1,11 @@
-<p>
-  main works!
-</p>
+<!--<ng-template let-result let-query="query" #template>
+    {{ result.title }} ({{ result.index }})
+</ng-template>-->
+<main>
+  <app-searcher></app-searcher>
+
+  <section class="ui container">
+      <app-search-list *ngFor="let commute of commutes" [commute]="commute"></app-search-list>
+  </section>
+
+</main>
