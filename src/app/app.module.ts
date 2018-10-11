@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment.prod';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +16,10 @@ import { SignupComponent } from './components/forms/signup/signup.component';
 import { MainComponent } from './components/main/main.component';
 import { SearcherComponent } from './components/search/searcher/searcher.component';
 import { SearchListComponent } from './components/search/search-list/search-list.component';
-import { CommuteDetailComponent } from './components/searcher/commute-detail/commute-detail.component';
+import { CommuteDetailComponent } from './components/search/commute-detail/commute-detail.component';
+import { MapComponent } from './components/map/map.component';
+
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -27,14 +31,18 @@ import { CommuteDetailComponent } from './components/searcher/commute-detail/com
     MainComponent,
     SearcherComponent,
     SearchListComponent,
-    CommuteDetailComponent
+    CommuteDetailComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SuiModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC_PTZahDN-RVIgYanjaQ_eBunOvQj19VY'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

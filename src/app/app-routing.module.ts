@@ -1,4 +1,5 @@
-import { CommuteDetailComponent } from './components/searcher/commute-detail/commute-detail.component';
+import { MapComponent } from './components/map/map.component';
+import { CommuteDetailComponent } from './components/search/commute-detail/commute-detail.component';
 import { SessionComponent } from './components/forms/session/session.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: SessionComponent },
   { path: 'search', component: MainComponent },
-  { path: 'commute/:commuteId', component: CommuteDetailComponent }
+  { path: 'commute/:commuteId', component: CommuteDetailComponent },
+  { path: 'map', component: MapComponent }
 ];
 
 @NgModule({
