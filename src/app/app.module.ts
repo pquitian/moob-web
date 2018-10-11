@@ -41,7 +41,7 @@ import { AgmCoreModule } from '@agm/core';
     FormsModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC_PTZahDN-RVIgYanjaQ_eBunOvQj19VY'
+      apiKey: `${environment.mapsKey}`
     })
   ],
   providers: [],
