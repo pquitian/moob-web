@@ -1,11 +1,10 @@
 import { User } from './user.model';
 import { Vehicle } from './vehicle.model';
-import { Coordinates } from './misc/coordinates.model';
 
 export class Commute {
     id?: string;
-    origin: Coordinates[] = [];
-    destination: Coordinates[] = [];
+    origin: number[] = [];
+    destination: number[] = [];
     vehicle: Vehicle;
     driver: User;
     passengers: User[] = [];
