@@ -20,6 +20,7 @@ export class SessionService extends BaseApiService {
   constructor(private http: HttpClient) {
     super();
     const userData = localStorage.getItem(SessionService.CURRENT_USER_KEY);
+    // console.log(JSON.parse(userData).id);
     if (userData) {
       this.user = Object.assign(new User(), JSON.parse(userData));
     }
@@ -37,10 +38,10 @@ export class SessionService extends BaseApiService {
       );
   }
 
-  doAuthenticate(user: User): void {
-    this.user = user;
-    localStorage.setItem(SessionService.CURRENT_USER_KEY, JSON.stringify(this.user));
-    this.notifyUserChanges();
+  getLocalStorageId(): string {
+    const userData = localStorage.getItem(SessionService.CURRENT_USER_KEY);
+    const userID = JSON.parse(userData).id;
+    return userID;
   }
 
   onUserChanges(): Observable<User> {
@@ -55,6 +56,11 @@ export class SessionService extends BaseApiService {
     this.userSubject.next(this.user);
   }
 
+  private doAuthenticate(user: User): void {
+    this.user = user;
+    localStorage.setItem(SessionService.CURRENT_USER_KEY, JSON.stringify(this.user));
+    this.notifyUserChanges();
+  }
   //TODO: logout()
 
 

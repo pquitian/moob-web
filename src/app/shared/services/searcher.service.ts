@@ -44,9 +44,7 @@ export class SearcherService extends BaseApiService {
   }
 
   addPassenger(commuteId: string) {
-    const userData = localStorage.getItem(SearcherService.CURRENT_USER_KEY);
-    const userID = JSON.parse(userData).id;
-
+    const userID = this.sessionService.getLocalStorageId();
     return this.http.post<void>(`${SearcherService.API_SEARCH}/${commuteId}`, { id: userID }, BaseApiService.defaultOptions)
       .subscribe((data) => {
         console.log(data);
