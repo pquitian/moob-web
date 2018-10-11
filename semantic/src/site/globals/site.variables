@@ -3,5 +3,6 @@
 *******************************/
 
 @emSize   : 16px;
-@fontSize : 18px;
+@fontSize : 16px;
 @pageBackground: #f2f2f2;
+
