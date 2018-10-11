@@ -15,6 +15,7 @@ import { SignupComponent } from './components/forms/signup/signup.component';
 import { MainComponent } from './components/main/main.component';
 import { SearcherComponent } from './components/search/searcher/searcher.component';
 import { SearchListComponent } from './components/search/search-list/search-list.component';
+import { CommuteDetailComponent } from './components/searcher/commute-detail/commute-detail.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SearchListComponent } from './components/search/search-list/search-list
     SignupComponent,
     MainComponent,
     SearcherComponent,
-    SearchListComponent
+    SearchListComponent,
+    CommuteDetailComponent
   ],
   imports: [
     BrowserModule,
