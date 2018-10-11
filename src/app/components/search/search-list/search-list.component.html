@@ -1,19 +1,34 @@
 
 
-<article class="ui card">
-  <div class="content">
-    <div class="header">{{commute.origin.coordinates}} - {{commute.destination.coordinates}}</div>
-    <div class="meta">
-      <span class="right floated time">{{commute.departureTime}}</span>
-      <span class="category">Something here</span>
-    </div>
-    <div class="description">
-      <p></p>
+<article class="ui card grid">
+  <div class="extra content separator">
+    <i class="inverted car icon"></i>
+    <span class="inverted">Car name</span>
+  </div>
+  <div class="ui row">
+    <div class="eleven wide column">
+        <small>Origin:</small> <p>{{commute.origin}}</p>
+        <small>Destination:</small> <p>{{commute.destination}}</p>
+  </div>
+    <div class="five wide column author center aligned">
+      <img class="ui avatar image" [src]="commute.driver.avatar">
+      <p>{{commute.driver.name}}</p> 
     </div>
   </div>
-  <div class="extra content">
-    <div class="right floated author">
-      <img class="ui avatar image" [src]="commute.driver.avatar"> {{commute.driver.name}}
+  <div class="content">
+    
+  <!--<div class="meta">
+    <span class="right floated time">{{commute.departureTime}}</span>
+    <span class="category">Something here</span>
+  </div>-->
+  <div class="description">
+    <p></p>
+    <div class="ui two buttons">
+      <div class="ui basic teal button" (click)="addPassenger()">Join</div>
+      <div class="ui basic orange button" (click)="openDetail(commute.id)">View details</div>
     </div>
+    </div>
+  </div>
+  <div class="extra content separator">
   </div>
 </article>

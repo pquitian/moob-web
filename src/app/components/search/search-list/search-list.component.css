@@ -2,3 +2,10 @@
     width: 100%;
     margin: 0.5em 0;
 }
+
+.ui.card>.extra.separator {
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+    background-color: #00b5ad!important;
+    color: white;
+}

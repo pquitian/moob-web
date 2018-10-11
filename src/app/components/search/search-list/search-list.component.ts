@@ -1,5 +1,8 @@
+import { SearcherService } from './../../../shared/services/searcher.service';
+import { Router } from '@angular/router';
 import { Commute } from './../../../shared/models/commute.model';
 import { Component, OnInit, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-search-list',
@@ -9,9 +12,18 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SearchListComponent implements OnInit {
   @Input() commute: Commute = new Commute();
 
-  constructor() { }
+  constructor(private router: Router, private searcherService: SearcherService) { }
 
   ngOnInit() {
+  }
+
+  openDetail(id: string): void {
+    this.router.navigate(['/commute', id]);
+  }
+
+  addPassenger(): void {
+    //console.log(this.commute.id)
+    this.searcherService.addPassenger(this.commute.id);
   }
 
 }
