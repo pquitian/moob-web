@@ -19,10 +19,15 @@
       </div>
     </div>
 
-    <!-- Vehicle -->
-    <div *ngIf="commute.vehicle;else vehicleForm">
-      Your vehicle for this commute is:
-      <p>{{ commute.vehicle.brand }} {{ commute.vehicle.model }}</p>
+    <!-- Vehicle Selection -->
+    <div *ngIf="authUser.vehicles;else vehicleForm">
+      Please, choose your vehicle for this commute:
+      <div class="field" [ngClass]="{ 'error' : apiError || vehicle.errors && vehicle.touched }">
+          <select class="ui fluid dropdown" name="vehicle" [(ngModel)]="commute.vehicle" #vehicle="ngModel" required>
+            <option [ngValue]="null" selected disabled>Select one...</option>
+            <option *ngFor="let vehicle of authUser.vehicles"  [ngValue]="vehicle">{{ vehicle.brand }} {{ vehicle.model }}</option>
+          </select>
+      </div>
     </div>
 
     <!--Vehicle form-->

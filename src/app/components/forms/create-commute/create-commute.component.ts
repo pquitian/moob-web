@@ -36,7 +36,6 @@ export class CreateCommuteComponent implements OnInit {
     this.onAuthUserChanges = this.sessionService.onUserChanges()
     .subscribe((user: User) => this.authUser = user);
 
-    this.commute.vehicle = this.authUser.vehicles[0];
   }
 
   ngOnDestroy() {
