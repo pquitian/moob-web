@@ -1,4 +1,4 @@
-import { SearcherService } from './../../../shared/services/searcher.service';
+import { CommutesService } from './../../../shared/services/commutes.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearcherComponent implements OnInit {
 
-  constructor(private searcherService: SearcherService) { }
+  constructor(private commutesService: CommutesService) { }
 
   ngOnInit() {
   }

@@ -6,12 +6,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SignupComponent } from './components/forms/signup/signup.component';
 import { MainComponent } from './components/main/main.component';
+import { CreateCommuteComponent } from './components/forms/create-commute/create-commute.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: SessionComponent },
   { path: 'search', component: MainComponent },
+  { path: 'commute/new', component: CreateCommuteComponent },
   { path: 'commute/:commuteId', component: CommuteDetailComponent },
   { path: 'map', component: MapComponent }
 ];

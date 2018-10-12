@@ -1,4 +1,4 @@
-import { SearcherService } from './../../../shared/services/searcher.service';
+import { CommutesService } from './../../../shared/services/commutes.service';
 import { Router } from '@angular/router';
 import { Commute } from './../../../shared/models/commute.model';
 import { Component, OnInit, Input } from '@angular/core';
@@ -12,7 +12,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SearchListComponent implements OnInit {
   @Input() commute: Commute = new Commute();
 
-  constructor(private router: Router, private searcherService: SearcherService) { }
+  constructor(private router: Router, private commutesService: CommutesService) { }
 
   ngOnInit() {
   }
@@ -23,7 +23,7 @@ export class SearchListComponent implements OnInit {
 
   addPassenger(): void {
     //console.log(this.commute.id)
-    this.searcherService.addPassenger(this.commute.id);
+    this.commutesService.addPassenger(this.commute.id);
   }
 
 }

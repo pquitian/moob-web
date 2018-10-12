@@ -20,6 +20,7 @@ import { CommuteDetailComponent } from './components/search/commute-detail/commu
 import { MapComponent } from './components/map/map.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { CreateCommuteComponent } from './components/forms/create-commute/create-commute.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AgmCoreModule } from '@agm/core';
     SearcherComponent,
     SearchListComponent,
     CommuteDetailComponent,
-    MapComponent
+    MapComponent,
+    CreateCommuteComponent
   ],
   imports: [
     BrowserModule,
