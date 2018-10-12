@@ -18,19 +18,63 @@
         Add a destination
       </div>
     </div>
-    <div class="ui fluid action input field">
-      <input suiDatepicker
-              [(ngModel)]="commute.departureTime"
-              [pickerUseNativeOnMobile]="true"
-              name="departureTime"
-              required>
+
+    <!-- Vehicle -->
+    <div *ngIf="commute.vehicle;else vehicleForm">
+      Your vehicle for this commute is:
+      <p>{{ commute.vehicle.brand }} {{ commute.vehicle.model }}</p>
+    </div>
+
+    <!--Vehicle form-->
+    <ng-template #vehicleForm>
+      You don't have a vehicle yet. Please, register one here: 
+      <div class="field">
+        <div class="two fiels">
+          <div class="field" [ngClass]="{ 'error' : apiError || brand.errors && brand.touched }">
+              <input type="text" required name="brand" placeholder="Brand" [(ngModel)]="vehicle.brand" #brand="ngModel" required>
+            <div class="ui error message" *ngIf="brand.errors && brand.touched && brand.errors.required">
+              Please, write a brand
+            </div>
+          </div>
   
-      <button class="ui teal icon button" (click)="today()">
-        <i class="checked calendar icon"></i>
-      </button>
-      <button class="ui secondary icon button" (click)="unset()">
-        <i class="remove icon"></i>
-      </button>
+          <div class="field" [ngClass]="{ 'error' : apiError || model.errors && model.touched }">
+              <input type="text" required name="model" placeholder="Model" [(ngModel)]="vehicle.model" #model="ngModel" required>
+            <div class="ui error message" *ngIf="model.errors && model.touched && model.errors.required">
+              Please, write a model
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+        <div class="field" [ngClass]="{ 'error' : apiError || fuel.errors && fuel.touched }">
+            <select class="ui fluid dropdown" name="fuel" [(ngModel)]="vehicle.fuel" #fuel="ngModel" required>
+              <option [ngValue]="null" selected disabled>Fuel</option>
+              <option [ngValue]="diesel">Diesel</option>
+              <option [ngValue]="gasoline">Gasoline</option>
+              <option [ngValue]="electric">Electric</option>
+              <option [ngValue]="hybrid">Hybrid</option>
+              <option [ngValue]="LPG">LPG</option>
+            </select>
+        </div>
+          <div class="ui error message" *ngIf="fuel.errors && fuel.touched && fuel.errors.required">
+            Please, choose one option
+          </div>
+    </ng-template>
+    
+    
+    
+    <div class="field">
+      <label for="">Departure date:</label>
+      <div class="ui left icon input">
+        <i class="calendar icon"></i>
+        <input suiDatepicker
+                [(ngModel)]="commute.departureTime"
+                [pickerUseNativeOnMobile]="true"
+                name="departureTime"
+                required>
+      </div>
+  
     </div>
     <button type="submit" class="ui fluid large teal submit button" [ngClass]="{ 'disabled' : !createCommuteForm.valid }"><i class="add sign icon"></i> Add commute</button>
   </div>
