@@ -1,1 +1,4 @@
-<agm-map [latitude]="lat" [longitude]="lng"></agm-map>
+<input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search [formControl]="searchControl">
+<agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="zoom">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
