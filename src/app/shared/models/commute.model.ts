@@ -9,7 +9,6 @@ export class Commute {
     driver: User;
     passengers: User[] = [];
     departureTime: Date;
-    arrivalTime: Date;
     createdAt?: Date;
     updatedAt?: Date;
 }

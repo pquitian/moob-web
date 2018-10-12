@@ -1,0 +1,40 @@
+<form class="ui large form" (ngSubmit)="onSubmitCreateCommute(createCommuteForm)" #createCommuteForm="ngForm">
+  <div class="ui raised segment">
+    <div class="field" [ngClass]="{ 'error' : apiError || origin.errors && origin.touched }">
+      <div class="ui left icon input">
+          <i class="globe basic icon"></i>
+        <input type="text" required name="origin" [(ngModel)]="commute.origin" placeholder="Where are you going to travel from?" #origin="ngModel" required>
+      </div>
+      <div class="ui error message" *ngIf="origin.errors && origin.touched && origin.errors.required">
+        Add an origin
+      </div>
+    </div>
+    <div class="field" [ngClass]="{ 'error' : apiError || destination.errors && destination.touched }">
+      <div class="ui left icon input">
+        <i class="globe basic icon"></i>
+        <input type="text" required name="destination" [(ngModel)]="commute.destination" placeholder="What is your destination?" #destination="ngModel" required>
+      </div>
+      <div class="ui error message" *ngIf="destination.errors && destination.touched && destination.errors.required">
+        Add a destination
+      </div>
+    </div>
+    <div class="ui fluid action input field">
+      <input suiDatepicker
+              [(ngModel)]="commute.departureTime"
+              [pickerUseNativeOnMobile]="true"
+              name="departureTime"
+              required>
+  
+      <button class="ui teal icon button" (click)="today()">
+        <i class="checked calendar icon"></i>
+      </button>
+      <button class="ui secondary icon button" (click)="unset()">
+        <i class="remove icon"></i>
+      </button>
+    </div>
+    <button type="submit" class="ui fluid large teal submit button" [ngClass]="{ 'disabled' : !createCommuteForm.valid }"><i class="add sign icon"></i> Add commute</button>
+  </div>
+
+</form>
+
+    
