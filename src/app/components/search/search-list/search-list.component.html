@@ -21,13 +21,16 @@
     <span class="right floated time">{{commute.departureTime}}</span>
     <span class="category">Something here</span>
   </div>-->
-  <div class="description">
-    <p></p>
-    <div class="ui two buttons">
-      <div class="ui basic teal button" (click)="addPassenger()">Join</div>
-      <div class="ui basic orange button" (click)="openDetail(commute.id)">View details</div>
+    <div class="description">
+      <p></p>
+      <div class="ui two buttons">
+        <div class="ui basic teal button" (click)="addPassenger()">Join</div>
+        <div class="ui basic orange button" (click)="openDetail(commute.id)">View details</div>
+      </div>
     </div>
-    </div>
+    <span *ngFor="let passenger of commute.passengers">
+      {{ passenger.name }} | 
+    </span>
   </div>
   <div class="extra content separator">
   </div>
