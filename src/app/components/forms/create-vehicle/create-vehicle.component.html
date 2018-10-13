@@ -19,7 +19,7 @@
 
 <div class="field" [ngClass]="{ 'error' : apiError || fuel.errors && fuel.touched }">
     <select class="ui fluid dropdown" name="fuel" [(ngModel)]="vehicle.fuel" #fuel="ngModel" (change)="onFormUpdated()" required>
-    <option value="undefined" disabled selected>Fuel</option>
+    <option value="undefined" disabled>Fuel</option>
       <option value="diesel">Diesel</option>
       <option value="gasoline">Gasoline</option>
       <option value="electric">Electric</option>

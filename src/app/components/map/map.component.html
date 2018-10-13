@@ -2,9 +2,6 @@
 <input placeholder="Destination" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #searchDes [formControl]="searchControl">
 
 <agm-map [latitude]="origin.lat" [longitude]="origin.lng" [scrollwheel]="false" [zoom]="zoom">
-    <!---<agm-marker [latitude]="origin.lat" [longitude]="origin.lng"></agm-marker>
-    <agm-marker [latitude]="destination.lat" [longitude]="destination.lng"></agm-marker>-->
-
     <agm-direction [origin]="origin" [destination]="destination">
     </agm-direction>
 </agm-map>

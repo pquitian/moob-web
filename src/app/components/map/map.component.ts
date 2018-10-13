@@ -12,7 +12,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
   //lat: number;
   //lng: number;
   origin: Coordinates;
@@ -31,8 +31,6 @@ export class MapComponent implements OnInit {
   constructor( private geoService: GeoService) { }
 
   ngOnInit() {
-    console.log('inicio componente');
-
     this.searchControl = new FormControl();
 
     // this.geoService.setCurrentPosition();
