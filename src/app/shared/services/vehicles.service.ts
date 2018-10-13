@@ -12,7 +12,7 @@ import { Injectable } from '@angular/core';
 })
 export class VehiclesService extends BaseApiService {
 
-  private static readonly API_USERS = `${BaseApiService}/users`;
+  private static readonly API_USERS = `${BaseApiService.BASE_API}/users`;
   private static readonly API_VEHICLES = '/vehicles';
 
   vehicles: Vehicle[] = [];

@@ -20,7 +20,7 @@
     </div>
 
     <!-- Vehicle Selection -->
-    <div *ngIf="authUser.vehicles;else vehicleForm">
+    <div *ngIf="authUser.vehicles.length > 0">
       Please, choose your vehicle for this commute:
       <div class="field" [ngClass]="{ 'error' : apiError || vehicle.errors && vehicle.touched }">
           <select class="ui fluid dropdown" name="vehicle" [(ngModel)]="commute.vehicle" #vehicle="ngModel" required>
@@ -31,41 +31,11 @@
     </div>
 
     <!--Vehicle form-->
-    <ng-template #vehicleForm>
+    <div *ngIf="authUser.vehicles.length === 0">
       You don't have a vehicle yet. Please, register one here: 
-      <div class="field">
-        <div class="two fiels">
-          <div class="field" [ngClass]="{ 'error' : apiError || brand.errors && brand.touched }">
-              <input type="text" required name="brand" placeholder="Brand" [(ngModel)]="vehicle.brand" #brand="ngModel" required>
-            <div class="ui error message" *ngIf="brand.errors && brand.touched && brand.errors.required">
-              Please, write a brand
-            </div>
-          </div>
-  
-          <div class="field" [ngClass]="{ 'error' : apiError || model.errors && model.touched }">
-              <input type="text" required name="model" placeholder="Model" [(ngModel)]="vehicle.model" #model="ngModel" required>
-            <div class="ui error message" *ngIf="model.errors && model.touched && model.errors.required">
-              Please, write a model
-            </div>
-          </div>
-        </div>
-      </div>
-
-      
-        <div class="field" [ngClass]="{ 'error' : apiError || fuel.errors && fuel.touched }">
-            <select class="ui fluid dropdown" name="fuel" [(ngModel)]="vehicle.fuel" #fuel="ngModel" required>
-              <option [ngValue]="null" selected disabled>Fuel</option>
-              <option [ngValue]="diesel">Diesel</option>
-              <option [ngValue]="gasoline">Gasoline</option>
-              <option [ngValue]="electric">Electric</option>
-              <option [ngValue]="hybrid">Hybrid</option>
-              <option [ngValue]="LPG">LPG</option>
-            </select>
-        </div>
-          <div class="ui error message" *ngIf="fuel.errors && fuel.touched && fuel.errors.required">
-            Please, choose one option
-          </div>
-    </ng-template>
+      <app-create-vehicle (formVehicleUpdate)="onCreateVehicleFormChanges($event)"></app-create-vehicle>
+    </div>
+    
     
     
     
@@ -81,7 +51,7 @@
       </div>
   
     </div>
-    <button type="submit" class="ui fluid large teal submit button" [ngClass]="{ 'disabled' : !createCommuteForm.valid }"><i class="add sign icon"></i> Add commute</button>
+    <button type="submit" class="ui fluid large teal submit button" [disabled]="!createCommuteForm.valid && !isVehicleFormValid"><i class="add sign icon"></i> Add commute</button>
   </div>
 
 </form>
