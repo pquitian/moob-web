@@ -1,4 +1,10 @@
-<input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search [formControl]="searchControl">
-<agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="zoom">
-    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+<input placeholder="Origin" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #searchOr [formControl]="searchControl">
+<input placeholder="Destination" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #searchDes [formControl]="searchControl">
+
+<agm-map [latitude]="origin.lat" [longitude]="origin.lng" [scrollwheel]="false" [zoom]="zoom">
+    <!---<agm-marker [latitude]="origin.lat" [longitude]="origin.lng"></agm-marker>
+    <agm-marker [latitude]="destination.lat" [longitude]="destination.lng"></agm-marker>-->
+
+    <agm-direction [origin]="origin" [destination]="destination">
+    </agm-direction>
 </agm-map>

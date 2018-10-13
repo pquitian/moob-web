@@ -20,7 +20,9 @@ import { CommuteDetailComponent } from './components/search/commute-detail/commu
 import { MapComponent } from './components/map/map.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
 import { CreateCommuteComponent } from './components/forms/create-commute/create-commute.component';
+import { CreateVehicleComponent } from './components/forms/create-vehicle/create-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { CreateCommuteComponent } from './components/forms/create-commute/create
     SearchListComponent,
     CommuteDetailComponent,
     MapComponent,
-    CreateCommuteComponent
+    CreateCommuteComponent,
+    CreateVehicleComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import { CreateCommuteComponent } from './components/forms/create-commute/create
       apiKey: `${environment.mapsKey}`,
       libraries: ['places']
     }),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmDirectionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

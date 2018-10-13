@@ -1,6 +1,9 @@
+import { Coordinates } from './../../shared/models/coordinates.model';
+import { Subscription } from 'rxjs';
+import { GeoService } from './../../shared/services/geo.service';
 /// <reference types="@types/googlemaps" />
-import { Component, OnInit, NgModule, ViewChild, ElementRef, NgZone } from '@angular/core';
-import { AgmCoreModule, MapsAPILoader } from '@agm/core';
+import { Component, OnInit, NgModule, ViewChild, ElementRef, OnDestroy} from '@angular/core';
+
 import { FormControl } from '@angular/forms';
 
 
@@ -10,56 +13,46 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-  lat: number;
-  lng: number;
+  //lat: number;
+  //lng: number;
+  origin: Coordinates;
+  originChanges: Subscription;
+
+  destination: Coordinates;
+  destinationChanges: Subscription;
+
   searchControl: FormControl;
   zoom: number;
 
-  @ViewChild('search') public searcElementRef: ElementRef;
+  @ViewChild('searchOr') public searchElementRefOr: ElementRef;
+  @ViewChild('searchDes') public searchElementRefDes: ElementRef;
 
 
-  constructor(
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone ) { }
+  constructor( private geoService: GeoService) { }
 
   ngOnInit() {
+    console.log('inicio componente');
 
     this.searchControl = new FormControl();
 
-    this.setCurrentPosition();
+    // this.geoService.setCurrentPosition();
 
-    this.mapsAPILoader.load()
-      .then(() => {
-        const autocomplete = new google.maps.places.Autocomplete(this.searcElementRef.nativeElement, {
-          types: ['address']
-        });
-        autocomplete.addListener('place_changed', () => {
-          this.ngZone.run(() => {
-            // It gets the place result
-            const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+    // Origin
+    this.geoService.setOrigin(this.searchElementRefOr);
+    this.originChanges = this.geoService.onOriginChanges()
+      .subscribe((origin: Coordinates) => this.origin = origin);
 
-            // verify result
-            if (place.geometry === undefined || place.geometry === null) {
-              return;
-            }
+    // Destination
+    this.geoService.setDestination(this.searchElementRefDes);
+    this.destinationChanges = this.geoService.onDestinationChanges()
+    .subscribe((destination: Coordinates) => this.destination = destination);
 
-            // set latitude, longitude and zoom
-            this.lat = place.geometry.location.lat();
-            this.lng = place.geometry.location.lng();
-            this.zoom = 14;
-          });
-        });
-      });
   }
 
-  private setCurrentPosition() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        this.zoom = 12;
-      });
-    }
+  ngOnDestroy() {
+    this.destinationChanges.unsubscribe();
+    this.originChanges.unsubscribe();
   }
+
 
 }
