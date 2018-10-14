@@ -71,7 +71,7 @@ export class CreateCommuteComponent implements OnInit, OnDestroy {
     this.destinationChangesSubscription.unsubscribe();
   }
 
-  onSubmitCreateCommute(commuteForm: FormGroup) {
+  onSubmitCreateCommute(commuteForm: FormGroup): void {
     console.log(this.createVehicle);
     console.log(commuteForm);
     this.commute.origin[0] = this.origin.lat;
@@ -85,20 +85,18 @@ export class CreateCommuteComponent implements OnInit, OnDestroy {
         this.commutesService.createCommute(this.commute)
         .subscribe(() => {
           commuteForm.reset();
-          this.router.navigate(['/commutes', this.commute.id]);
+          // this.router.navigate(['/commutes', this.commute.id]);
+          this.router.navigate(['/search']);
         });
       });
     }
 
     if (commuteForm.valid && this.commute.vehicle) {
-      console.log('HOLA PAULA');
-      console.log('This commute -->', this.commute);
-      console.log('This commute vehicle --> ', this.commute.vehicle);
-      console.log('This commute vehicle id --> ', this.commute.vehicle.id);
       this.commutesService.createCommute(this.commute)
         .subscribe(() => {
           commuteForm.reset();
-          this.router.navigate(['/commutes', this.commute.id]);
+          // this.router.navigate(['/commutes', this.commute.id]);
+          this.router.navigate(['/search']);
         });
     }
   }

@@ -3,7 +3,7 @@
 <article class="ui card grid">
   <div class="extra content separator">
     <i class="inverted car icon"></i>
-    <span class="inverted">Car name</span>
+    <span class="inverted" *ngIf="commute.vehicle">Car name {{ commute.vehicle.brand }} {{ commute.vehicle.model }}</span>
   </div>
   <div class="ui row">
     <div class="eleven wide column">
