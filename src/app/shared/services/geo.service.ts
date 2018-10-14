@@ -21,6 +21,7 @@ export class GeoService {
     private ngZone: NgZone
   ) {}
 
+
   setOrigin(searchElementRef: ElementRef) {
     this.mapsAPILoader.load()
       .then(() => {
@@ -69,6 +70,28 @@ export class GeoService {
           });
         });
       });
+  }
+
+  getAddress(point: number[]) {
+    const geocoder = new google.maps.Geocoder();
+
+    // let latlng = new google.maps.LatLng(this.lat, this.long);
+    const latlng = new google.maps.LatLng(point[0], point[1]);
+    const request = {
+      latLng: latlng
+    };
+    geocoder.geocode(request, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        if (results[0] != null) {
+          console.log(results[0].formatted_address.split(',')[0]);
+          const address = results[0].formatted_address.split(',')[0];
+          console.log(address);
+          return address;
+        } else {
+          console.error('No address available');
+        }
+      }
+    });
   }
 
   onOriginChanges(): Observable<Coordinates> {
