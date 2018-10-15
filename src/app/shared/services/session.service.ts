@@ -38,6 +38,14 @@ export class SessionService extends BaseApiService {
       );
   }
 
+  logout(): Observable<void | ApiErrors> {
+    return this.http.delete(SessionService.API_SESSION, BaseApiService.defaultOptions)
+      .pipe(
+        map(() => this.doLogout()),
+        catchError(this.handleError)
+      );
+  }
+
   getLocalStorageId(): string {
     const userData = localStorage.getItem(SessionService.CURRENT_USER_KEY);
     const userID = JSON.parse(userData).id;
@@ -63,5 +71,9 @@ export class SessionService extends BaseApiService {
   }
   //TODO: logout()
 
-
+  private doLogout(): void {
+    this.user = null;
+    localStorage.removeItem(SessionService.CURRENT_USER_KEY);
+    this.notifyUserChanges();
+  }
 }

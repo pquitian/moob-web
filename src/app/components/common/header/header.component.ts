@@ -1,15 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { User } from './../../../shared/models/user.model';
+import { Router } from '@angular/router';
+import { SessionService } from './../../../shared/services/session.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  user: User;
+  onUserChanges: Subscription;
+
+  constructor(
+    private sessionService: SessionService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.user = this.sessionService.user;
+    this.onUserChanges = this.sessionService.onUserChanges()
+      .subscribe((user: User) => this.user = user);
+  }
+
+  ngOnDestroy() {
+    this.onUserChanges.unsubscribe();
+  }
+
+  onClickLogOut(): void {
+    this.sessionService.logout()
+      .subscribe(() => {
+        this.router.navigate(['/login']);
+      });
   }
 
 }
