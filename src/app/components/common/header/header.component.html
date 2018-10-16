@@ -1,19 +1,21 @@
-<div class="ui bottom attached four item menu">
-  <div class="item" [routerLink]="['/']">moob</div>
-
-  <div class="item" *ngIf="!user" [routerLink]="['/login']">
-    <i class="sign in alternate icon"></i>
+<header>
+  <div class="ui bottom attached four item menu">
+    <div class="item" [routerLink]="['/']">moob</div>
+  
+    <div class="item" *ngIf="!user" routerLinkActive="active" [routerLink]="['/login']">
+      <i class="sign in alternate icon"></i>
+    </div>
+  
+    <div class="item" *ngIf="user" routerLinkActive="active" [routerLink]="['/search']" >
+      <i class="search icon"></i>
+    </div>
+    <!--<div class="item" *ngIf="user"><i class="user icon"></i></div>-->
+    <div class="item" *ngIf="user" routerLinkActive="active" [routerLink]="['/users', user.id, 'messages']">
+      <i class="comments icon"></i>
+    </div>
+  
+    <div class="item" *ngIf="user" (click)="onClickLogOut()">
+      <i class="sign out alternate icon"></i>
+    </div>
   </div>
-
-  <div class="item" *ngIf="user" [routerLink]="['/search']">
-    <i class="search icon"></i>
-  </div>
-  <!--<div class="item" *ngIf="user"><i class="user icon"></i></div>-->
-  <div class="item" *ngIf="user" [routerLink]="['/users', user.id, 'messages']">
-    <i class="comments icon"></i>
-  </div>
-
-  <div class="item" *ngIf="user" (click)="onClickLogOut()">
-    <i class="sign out alternate icon"></i>
-  </div>
-</div>
+</header>
