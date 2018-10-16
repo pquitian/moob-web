@@ -1,31 +1,37 @@
 <section class="ui container">
-  <sui-search [optionsLookup]="optionsSearch"
-                optionsField="title"
-                (resultSelected)="last = $event"
-                placeholder="Origin"
-                hasIcon="false">
-  </sui-search>
-  
-  <sui-search [optionsLookup]="optionsSearch"
-                optionsField="title"
-                (resultSelected)="last = $event"
-                placeholder="Destination"
-                hasIcon="false">
-  </sui-search>
+  <form class="ui large form" #searchCommute="ngForm">
+    <div class="ui left icon input">
+      <i class="search icon"></i>
+      <input [formControl]="searchControl"
+                  optionsField="title"
+                  type="text"
+                  name="origin"
+                  placeholder="Origin"
+                  #origin
+                  hasIcon="false">
+    </div>
+    
+    <div class="ui left icon input">
+      <i class="search icon"></i>
+      <input [formControl]="searchControl"
+                  name="origin" 
+                  type="text"
+                  placeholder="Destination"
+                  #destination
+                  hasIcon="false">
+    </div>
 
-  <div class="ui fluid action input">
-      <input placeholder="Departure date"
-             suiDatepicker
-             [(ngModel)]="date"
-             [pickerUseNativeOnMobile]="true">
-  
-      <button class="ui primary icon button" (click)="today()">
-        <i class="checked calendar icon"></i>
-      </button>
-      <button class="ui secondary icon button" (click)="unset()">
-        <i class="remove icon"></i>
-      </button>
-  </div>
+    <div class="ui left icon input">
+        <i class="calendar icon"></i>
+        <input placeholder="Departure date"
+              suiDatepicker
+              [(ngModel)]="criteria.date_from"
+              name="departureTime"
+              (change)="onChangesCriteria()"
+              [pickerUseNativeOnMobile]="true">
+    
+    </div>
 
+  </form>
 </section>
 

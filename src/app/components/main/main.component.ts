@@ -1,6 +1,8 @@
+import { FilterCriteria } from './../../shared/models/filter-criteria.model';
+import { SearcherComponent } from './../search/searcher/searcher.component';
 import { Commute } from './../../shared/models/commute.model';
 import { CommutesService } from './../../shared/services/commutes.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,6 +14,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
   commutes: Commute[] = [];
   onCommutesChangesSubscription: Subscription;
+
+  criteria: FilterCriteria = new FilterCriteria();
+
+  @ViewChild(SearcherComponent) searcherComponent: SearcherComponent;
 
   constructor(private commutesService: CommutesService) { }
 
@@ -27,5 +33,12 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.onCommutesChangesSubscription.unsubscribe();
   }
+
+  onSearchFormChanges(criteria: FilterCriteria) {
+    if (criteria.origin_lat && criteria.dest_lng && criteria.date_from) {
+      console.log('Llamo al servicio');
+    }
+  }
+
 
 }

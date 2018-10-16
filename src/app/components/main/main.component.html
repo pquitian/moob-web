@@ -1,10 +1,10 @@
 <!--<ng-template let-result let-query="query" #template>
     {{ result.title }} ({{ result.index }})
 </ng-template>-->
-<main>
-  <app-searcher></app-searcher>
+<main class="search">
+  <app-searcher (criteriaUpdate)="onSearchFormChanges($event)"></app-searcher>
 
-  <section class="ui container">
+  <section class="ui container search__results">
       <app-search-list *ngFor="let commute of commutes" [commute]="commute"></app-search-list>
   </section>
 
