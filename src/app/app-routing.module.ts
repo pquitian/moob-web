@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SignupComponent } from './components/forms/signup/signup.component';
 import { MainComponent } from './components/main/main.component';
 import { CreateCommuteComponent } from './components/forms/create-commute/create-commute.component';
+import { ChatroomComponent } from './components/chat/chatroom/chatroom.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'search', component: MainComponent },
   { path: 'commute/new', component: CreateCommuteComponent },
   { path: 'commute/:commuteId', component: CommuteDetailComponent },
-  { path: 'map', component: MapComponent }
+  { path: 'map', component: MapComponent },
+  { path: 'users/:userId/messages', component: ChatroomComponent }
 ];
 
 @NgModule({
