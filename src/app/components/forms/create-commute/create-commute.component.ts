@@ -72,13 +72,12 @@ export class CreateCommuteComponent implements OnInit, OnDestroy {
   }
 
   onSubmitCreateCommute(commuteForm: FormGroup): void {
-    console.log(this.createVehicle);
-    console.log(commuteForm);
-    this.commute.origin[0] = this.origin.lat;
-    this.commute.origin[1] = this.origin.lng;
-    this.commute.destination[0] = this.destination.lat;
-    this.commute.destination[1] = this.destination.lng;
-    console.log(this.commute);
+    const originValue = this.originInput.nativeElement.value;
+    const destinationValue = this.destinationInput.nativeElement.value;
+
+    this.setCommuteAddress(originValue, destinationValue);
+    this.setLatLong();
+
     if (commuteForm.valid && this.isVehicleFormValid) {
       this.vehiclesService.create(this.authUser.id, this.createVehicle.vehicle)
       .subscribe((vehicle: Vehicle) => {
@@ -103,6 +102,30 @@ export class CreateCommuteComponent implements OnInit, OnDestroy {
 
   onCreateVehicleFormChanges(valid: boolean) {
     this.isVehicleFormValid = valid;
+  }
+
+  private setCommuteAddress(origin, destination): void {
+    const o = origin.split(',');
+    const d = destination.split(',');
+
+    if (o.length >= 4) {
+      this.commute.hrOrigin = `${o[0]},${o[1]}`;
+    } else {
+      this.commute.hrOrigin = o[0];
+    }
+
+    if (d.length >= 4) {
+      this.commute.hrDestination = `${d[0]},${d[1]}`;
+    } else {
+      this.commute.hrDestination = d[0];
+    }
+  }
+
+  private setLatLong() {
+    this.commute.origin[0] = this.origin.lat;
+    this.commute.origin[1] = this.origin.lng;
+    this.commute.destination[0] = this.destination.lat;
+    this.commute.destination[1] = this.destination.lng;
   }
 
 
