@@ -4,4 +4,5 @@ export class FilterCriteria {
     dest_lat: number;
     dest_lng: number;
     date_from: Date;
+    date_to: Date;
 }

@@ -1,9 +1,13 @@
 /// <reference types="@types/googlemaps" />
+import { throwError } from 'rxjs';
 import { Subject, Observable } from 'rxjs';
 import { Coordinates } from './../models/coordinates.model';
 import { environment } from '../../../environments/environment';
 import { Injectable, NgZone, ElementRef } from '@angular/core';
 import { AgmCoreModule, MapsAPILoader } from '@agm/core';
+
+declare var google: any;
+
 
 @Injectable({
   providedIn: 'root'
@@ -73,26 +77,45 @@ export class GeoService {
   }
 
   getAddress(point: number[]) {
-    const geocoder = new google.maps.Geocoder();
-
-    // let latlng = new google.maps.LatLng(this.lat, this.long);
-    const latlng = new google.maps.LatLng(point[0], point[1]);
-    const request = {
-      latLng: latlng
-    };
-    geocoder.geocode(request, function(results, status) {
-      if (status === google.maps.GeocoderStatus.OK) {
-        if (results[0] != null) {
-          console.log(results[0].formatted_address.split(',')[0]);
-          const address = results[0].formatted_address.split(',')[0];
-          console.log(address);
-          return address;
-        } else {
-          console.error('No address available');
-        }
-      }
+    const addressPromise = new Promise((resolve, reject) => {
+      this.mapsAPILoader.load()
+        .then(() => {
+          const geocoder = new google.maps.Geocoder();
+          const latlng = new google.maps.LatLng(point[0], point[1]);
+          const request = {
+            latLng: latlng
+          };
+          geocoder.geocode(request, (results, status) => {
+            if (status === google.maps.GeocoderStatus.OK && results[0] != null) {
+                const address = results[0].formatted_address.split(',')[0];
+                console.log('ADDRESS', address);
+                return resolve(address);
+              }
+                throwError ('No address available');
+          });
+        });
     });
+    return addressPromise;
   }
+
+  /*getAddress(point: number[]) {
+        const geocoder = new google.maps.Geocoder();
+        const latlng = new google.maps.LatLng(point[0], point[1]);
+        const request = {
+          latLng: latlng
+        };
+        geocoder.geocode(request, (results, status) => {
+          if (status === google.maps.GeocoderStatus.OK) {
+            if (results[0] != null) {
+              const address = results[0].formatted_address.split(',')[0];
+              console.log(address)
+              return address;
+            } else {
+              console.error('No address available');
+            }
+          }
+        });
+  }*/
 
   onOriginChanges(): Observable<Coordinates> {
     return this.originSubject.asObservable();

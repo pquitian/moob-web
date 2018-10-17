@@ -3,12 +3,12 @@
 <article class="ui card grid">
   <div class="extra content separator">
     <i class="inverted car icon"></i>
-    <span class="inverted" *ngIf="commute.vehicle">Car name {{ commute.vehicle.brand }} {{ commute.vehicle.model }}</span>
+    <span class="inverted" *ngIf="commute.vehicle">{{ commute.vehicle.brand }} {{ commute.vehicle.model }}</span>
   </div>
   <div class="ui row">
     <div class="eleven wide column">
-        <small>Origin:</small> <p>{{commute.origin}}</p>
-        <small>Destination:</small> <p>{{commute.destination}}</p>
+        <small>Origin:</small> <p>{{ commute.origin }}</p>
+        <small>Destination:</small> <p>{{commute.destination }}</p>
   </div>
     <div class="five wide column author center aligned">
       <img class="ui avatar image" [src]="commute.driver.avatar">
