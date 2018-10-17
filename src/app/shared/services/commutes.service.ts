@@ -17,8 +17,7 @@ export class CommutesService extends BaseApiService {
   private static readonly API_SEARCH = `${BaseApiService.BASE_API}/commutes`;
   private static readonly CURRENT_USER_KEY = 'current-user';
   private static readonly FILTER_ROUTE = 'filter';
-  private readonly HEADERS =  new HttpHeaders().set('Content-Type', 'application/json'),
-  withCredentials: true;
+  private readonly HEADERS =  new HttpHeaders().set('Content-Type', 'application/json'), withCredentials: true;
 
   private commutes: Commute[] = [];
   private commute: Commute = new Commute();
@@ -93,6 +92,13 @@ export class CommutesService extends BaseApiService {
         }),
         catchError(this.handleError)
       );
+  }
+
+  getOne(commuteId: string): Observable <Commute | ApiErrors>{
+    return this.http.get<Commute>(`${CommutesService.API_SEARCH}/${commuteId}`, BaseApiService.defaultOptions)
+      .pipe(
+        map((commute: Commute) => Object.assign(new Commute(), commute)),
+        catchError(this.handleError));
   }
 
 
