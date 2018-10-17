@@ -5,3 +5,12 @@
 .search__results {
     padding-top: 15px;
 }
+
+.search__actions {
+    text-align: center;
+
+}
+
+.search__actions p {
+    margin: 10px 0 15px;
+}

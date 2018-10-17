@@ -2,6 +2,16 @@
     {{ result.title }} ({{ result.index }})
 </ng-template>-->
 <main class="search">
+    <section class="ui container">
+        <div class="search__actions">
+            <button class="ui right labeled icon button orange">
+                <i class="plus icon"></i>
+                    Add a commute
+            </button>
+            <p>Or <strong>search</strong> and join other commutes</p>
+        </div>
+    </section>
+
   <app-searcher (criteriaUpdate)="onSearchFormChanges($event)"></app-searcher>
 
   <section class="ui container search__results">
