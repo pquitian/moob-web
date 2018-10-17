@@ -36,7 +36,12 @@ export class MainComponent implements OnInit, OnDestroy {
 
   onSearchFormChanges(criteria: FilterCriteria) {
     if (criteria.origin_lat && criteria.dest_lng && criteria.date_from) {
-      console.log('Llamo al servicio');
+      console.log('VOY!');
+      this.commutesService.filter(criteria)
+        .subscribe((commutes: Commute[]) => {
+          this.commutes = commutes;
+        });
+
     }
   }
 
