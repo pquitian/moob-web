@@ -7,8 +7,9 @@
   </div>
   <div class="ui row">
     <div class="eleven wide column">
-        <small>Origin:</small> <p>{{ commute.origin }}</p>
-        <small>Destination:</small> <p>{{commute.destination }}</p>
+        <small>Origin:</small> <p>{{ commute.hrOrigin }}</p>
+        <small>Destination:</small> <p>{{commute.hrDestination }}</p>
+        <small>Departure date:</small> <p>{{commute.departureTime }}</p>
   </div>
     <div class="five wide column author center aligned">
       <img class="ui avatar image" [src]="commute.driver.avatar">
