@@ -1,3 +1,4 @@
+import { FilterCriteria } from './../models/filter-criteria.model';
 import { User } from '../models/user.model';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
@@ -6,7 +7,7 @@ import { Commute } from '../models/commute.model';
 import { BaseApiService } from './base-api.service';
 import { SessionService } from './session.service';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders  } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +16,16 @@ export class CommutesService extends BaseApiService {
 
   private static readonly API_SEARCH = `${BaseApiService.BASE_API}/commutes`;
   private static readonly CURRENT_USER_KEY = 'current-user';
+  private static readonly FILTER_ROUTE = 'filter';
+  private readonly HEADERS =  new HttpHeaders().set('Content-Type', 'application/json'),
+  withCredentials: true;
 
   private commutes: Commute[] = [];
   private commute: Commute = new Commute();
   private commuteSubject: Subject<Array<Commute>> = new Subject();
 
 
-  constructor(
-    private http: HttpClient,
-    private sessionService: SessionService,
-    ) {
+  constructor(private http: HttpClient) {
     super();
   }
 
@@ -72,6 +73,28 @@ export class CommutesService extends BaseApiService {
         })
       );
   }
+
+  filter(criteria: FilterCriteria) {
+    let httpParams = new HttpParams();
+      Object.keys(criteria).forEach(function (key) {
+      httpParams = httpParams.append(key, criteria[key]);
+    });
+
+    
+
+    return this.http.get<FilterCriteria>(`${CommutesService.API_SEARCH}/${CommutesService.FILTER_ROUTE}`,
+    { headers: this.HEADERS, params: httpParams})
+      .pipe(
+        map((commutes: Commute[]) => {
+          commutes = commutes.map(commute => Object.assign(new Commute(), commute));
+          this.commutes = commutes;
+          this.notifyCommuteChanges();
+          return commutes;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
 
   onCommutesChanges(): Observable<Commute[]> {
     return this.commuteSubject.asObservable();

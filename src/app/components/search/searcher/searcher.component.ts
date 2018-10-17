@@ -1,6 +1,6 @@
 import { FilterCriteria } from './../../../shared/models/filter-criteria.model';
 import { GeoService } from './../../../shared/services/geo.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Coordinates } from 'src/app/shared/models/coordinates.model';
 import { Subscription } from 'rxjs';
 import { CommutesService } from './../../../shared/services/commutes.service';
@@ -15,20 +15,18 @@ export class SearcherComponent implements OnInit, OnDestroy {
 
   criteria: FilterCriteria = new FilterCriteria();
   origin: Coordinates = new Coordinates();
+  datePick: Date;
 
   searchControl: FormControl;
   @ViewChild('origin') originInput: ElementRef;
-  // origin: Coordinates = new Coordinates();
   originChangesSubscription: Subscription;
 
   @ViewChild('destination') destinationInput: ElementRef;
-  // destination: Coordinates = new Coordinates();
   destinationChangesSubscription: Subscription;
 
-  // @Output() originUpdate: EventEmitter<Coordinates> = new EventEmitter();
-  // @Output() destinationUpdate: EventEmitter<Coordinates> = new EventEmitter();
 
   @Output() criteriaUpdate: EventEmitter<FilterCriteria> = new EventEmitter();
+  @ViewChild('searchCommute') searchForm: FormGroup;
 
 
   constructor(private geoService: GeoService) { }
@@ -41,8 +39,6 @@ export class SearcherComponent implements OnInit, OnDestroy {
         this.criteria.origin_lat = origin.lat;
         this.criteria.origin_lng = origin.lng;
         this.criteriaUpdate.emit(this.criteria);
-        // this.origin = origin;
-        // this.originUpdate.emit(this.origin);
     });
 
 
@@ -52,8 +48,7 @@ export class SearcherComponent implements OnInit, OnDestroy {
           this.criteria.dest_lat = destination.lat;
           this.criteria.dest_lng = destination.lng;
           this.criteriaUpdate.emit(this.criteria);
-          // this.destination = destination;
-          // this.destinationUpdate.emit(this.destination);
+
     });
   }
 
@@ -63,7 +58,21 @@ export class SearcherComponent implements OnInit, OnDestroy {
   }
 
   onChangesCriteria() {
+    this.formatTime(this.datePick);
     this.criteriaUpdate.emit(this.criteria);
+  }
+
+  private formatTime(date) {
+    date = new Date(date);
+
+    let date_from  = new Date (date.setMinutes(date.getMinutes() - 30));
+    let date_to = new Date (date.setMinutes(date.getMinutes() + 60));
+
+    date_from = new Date(date_from).toISOString();
+    date_to = new Date(date_to).toISOString();
+
+    this.criteria.date_from = date_from;
+    this.criteria.date_to = date_to;
   }
 
 }
