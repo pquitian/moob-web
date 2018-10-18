@@ -12,8 +12,10 @@
         <small>Departure date:</small> <p>{{commute.departureTime }}</p>
   </div>
     <div class="five wide column author center aligned">
-      <img class="ui avatar image" [src]="commute.driver.avatar">
-      <p>{{commute.driver.name}}</p> 
+      <a [routerLink]="['/users', commute.driver.id]">
+        <img class="ui avatar image" [src]="commute.driver.avatar">
+        <p>{{commute.driver.name}}</p> 
+      </a>
     </div>
   </div>
   <div class="content">
