@@ -1,3 +1,5 @@
+import { InboxComponent } from './components/chat/inbox/inbox.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { CommuteResolverGuard } from './shared/guards/commute-resolver.guard';
 import { MapComponent } from './components/map/map.component';
 import { CommuteDetailComponent } from './components/search/commute-detail/commute-detail.component';
@@ -18,7 +20,9 @@ const routes: Routes = [
   { path: 'commute/new', component: CreateCommuteComponent },
   { path: 'commute/:commuteId', resolve: { commute: CommuteResolverGuard },  component: CommuteDetailComponent },
   { path: 'map', component: MapComponent },
-  { path: 'users/:userId/messages', component: ChatroomComponent }
+  { path: 'users/:userId', component: UserProfileComponent },
+  { path: 'users/:userId/messages', component: InboxComponent },
+  { path: 'users/:userAuth/messages/:userId', component: ChatroomComponent }
 ];
 
 @NgModule({

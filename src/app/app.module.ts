@@ -25,6 +25,8 @@ import { CreateCommuteComponent } from './components/forms/create-commute/create
 import { CreateVehicleComponent } from './components/forms/create-vehicle/create-vehicle.component';
 // import { AddressPipe } from './shared/pipes/address.pipe';
 import { ChatroomComponent } from './components/chat/chatroom/chatroom.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { InboxComponent } from './components/chat/inbox/inbox.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ChatroomComponent } from './components/chat/chatroom/chatroom.component
     CreateCommuteComponent,
     CreateVehicleComponent,
     // AddressPipe,
-    ChatroomComponent
+    ChatroomComponent,
+    UserProfileComponent,
+    InboxComponent
   ],
   imports: [
     BrowserModule,
