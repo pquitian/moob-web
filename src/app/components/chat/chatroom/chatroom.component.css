@@ -5,14 +5,43 @@
 }
 
 .chat__input {
-    position: absolute;
+    position: fixed;
     bottom: 0; 
-    display: flex;
-    justify-content: center;
+    left: 0;
     width: 100%;
-    padding: 1em 0;
+    padding: 1em;
+    background-color: #f2f2f2;
+    
 }
 
 .chat__input .input {
-    width: 90%;
+    width: 100%;
+}
+
+
+.chat__messages {
+    height: calc(100% - 80px);
+}
+
+.chat .ui.segment {
+    width: 70%;
+    position: static;
+}
+
+.segment.right {
+    text-align: right;
+}
+
+.chat__bubble {
+    display: flex;
+    flex-direction: row;
+    margin: 1em 0;
+}
+
+.chat__bubble.right {
+    justify-content: flex-end;
+}
+
+.chat__bubble.left {
+    justify-content: flex-start;
 }

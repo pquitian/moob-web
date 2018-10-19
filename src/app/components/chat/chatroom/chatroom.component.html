@@ -1,14 +1,35 @@
-<main class="chat">
+<main class="chat ui container">
   <header class="chat__header">
     
 
   </header>
+  <section class="chat__messages">
+    <ng-container *ngIf="messages">
+      <ng-container *ngFor="let message of messages">
+        <div class="chat__bubble right" *ngIf="message.to.id !== authUserId">
+          <div class="ui segment right">
+            <small>{{ message.from.name }}</small>
+            <p>{{message.message}}</p>
+          </div>
+        </div>
+        <div class="chat__bubble left" *ngIf="message.to.id === authUserId">
+          <div class="ui segment left">
+            <small>{{ message.from.name }}</small>
+            <p>{{message.message}}</p>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+    
+  </section>
+</main>
 
   <section class="chat__input">
     <div class="ui action input">
-      <input placeholder="Type..." type="text">
-      <button class="ui button orange">Send</button>
+      <form #sendMessageForm="ngForm" (ngSubmit)="onSubmitSendMessage(sendMessageForm)"></form>
+      <input placeholder="Type..." type="text" [(ngModel)]="message.message">
+      <button type="submit" class="ui button orange">Send</button>
     </div>
   </section>
-</main>
+
 
