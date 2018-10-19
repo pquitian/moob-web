@@ -1,29 +1,35 @@
 
 
-<article class="ui card grid">
+<article class="ui card grid commute-card">
   <div class="extra content separator">
     <i class="inverted car icon"></i>
     <span class="inverted" *ngIf="commute.vehicle">{{ commute.vehicle.brand }} {{ commute.vehicle.model }}</span>
   </div>
-  <div class="ui row">
+  <div class="ui row commute-card__info">
     <div class="eleven wide column">
         <small>Origin:</small> <p>{{ commute.hrOrigin }}</p>
         <small>Destination:</small> <p>{{commute.hrDestination }}</p>
         <small>Departure date:</small> <p>{{commute.departureTime }}</p>
-  </div>
-    <div class="five wide column author center aligned">
+    </div>
+    <div class="five wide column author center aligned commute-card__info-user">
       <a [routerLink]="['/users', commute.driver.id]">
         <img class="ui avatar image" [src]="commute.driver.avatar">
-        <p>{{commute.driver.name}}</p> 
+        <p class="user-name">{{commute.driver.name}}</p>
+      </a> 
+      <a class="ui icon" [routerLink]="['/users', authId, 'messages' ,commute.driver.id]">
+        <i class="icon comments teal"></i>
       </a>
+      <a class="ui icon" [routerLink]="['/users', commute.driver.id]">
+        <i class="icon eye orange"></i>
+      </a> 
     </div>
   </div>
   <div class="content">
     
-  <!--<div class="meta">
-    <span class="right floated time">{{commute.departureTime}}</span>
-    <span class="category">Something here</span>
-  </div>-->
+  <div class="meta">
+    <!--<span class="right floated time">{{commute.departureTime}}</span>
+    <span class="category">Something here</span>-->
+  </div>
     <div class="description">
       <p></p>
       <div class="ui two buttons">
@@ -31,9 +37,17 @@
         <div class="ui basic orange button" (click)="openDetail(commute.id)">View details</div>
       </div>
     </div>
-    <span *ngFor="let passenger of commute.passengers">
-      {{ passenger.name }} | 
-    </span>
+    <div class="commute-card__passengers">
+      <div class="meta" *ngIf="commute.passengers.length">
+        <small>Other passengers:</small>
+      </div>
+      <ng-container *ngFor="let passenger of commute.passengers">
+          <a class="ui image label" [routerLink]="['/users', passenger.id]">
+              <img src="{{ passenger.avatar }}">
+              {{ passenger.name }}
+          </a>
+      </ng-container>
+    </div>
   </div>
   <div class="extra content separator">
   </div>

@@ -9,3 +9,28 @@
     background-color: #00b5ad!important;
     color: white;
 }
+
+.commute-card__passengers .meta  {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.commute-card__passengers .label {
+    margin-right: 0.5em;
+}
+
+.commute-card__info p {
+    margin-bottom: 0.5em;
+}
+
+.commute-card__info a {
+    color: inherit;
+}
+
+.user-name {
+    margin-top: 0.5em;
+}
+
+.commute-card__info-user .icon {
+    margin: 0 0.2em;
+}
