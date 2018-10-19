@@ -65,8 +65,8 @@ export class SearcherComponent implements OnInit, OnDestroy {
   private formatTime(date) {
     date = new Date(date);
 
-    let date_from  = new Date (date.setMinutes(date.getMinutes() - 30));
-    let date_to = new Date (date.setMinutes(date.getMinutes() + 60));
+    let date_from: any  = new Date (date.setMinutes(date.getMinutes() - 30));
+    let date_to: any = new Date (date.setMinutes(date.getMinutes() + 60));
 
     date_from = new Date(date_from).toISOString();
     date_to = new Date(date_to).toISOString();

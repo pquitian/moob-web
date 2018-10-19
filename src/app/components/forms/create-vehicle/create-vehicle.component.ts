@@ -1,3 +1,4 @@
+import { ApiErrors } from './../../../shared/models/api-errors.model';
 import { Vehicle } from './../../../shared/models/vehicle.model';
 import { SessionService } from './../../../shared/services/session.service';
 import { VehiclesService } from './../../../shared/services/vehicles.service';
@@ -11,6 +12,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class CreateVehicleComponent implements OnInit {
 
+  apiError: ApiErrors;
   userId: string;
   vehicle: Vehicle = new Vehicle();
   @ViewChild('createVehicleForm') createVehicleForm: FormGroup;

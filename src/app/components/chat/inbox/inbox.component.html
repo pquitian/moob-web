@@ -1,0 +1,26 @@
+<main class="ui container">
+
+  <div class="ui comments">
+     <h3 class="ui dividing header">Inbox</h3>
+
+     <ng-container *ngIf="messages">
+        <ng-container *ngFor="let m of messages">
+          <ng-container *ngIf="m.id !== authUserId">
+            <div class="comment" >
+              <a class="avatar">
+                <img src="{{m.avatar}}">
+              </a>
+              <div class="content">
+                <a class="author">{{ m.name }}</a>
+                <div class="actions">
+                  <a class="reply" [routerLink]="['./', m.id ]">Reply</a>
+                </div>
+              </div>
+            </div>
+          <div class="ui divider"></div>
+        </ng-container>
+       </ng-container>
+    </ng-container>
+
+   </div>
+</main>

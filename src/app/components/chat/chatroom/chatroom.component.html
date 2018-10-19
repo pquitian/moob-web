@@ -5,17 +5,17 @@
   </header>
   <section class="chat__messages">
     <ng-container *ngIf="messages">
-      <ng-container *ngFor="let message of messages">
-        <div class="chat__bubble right" *ngIf="message.to.id !== authUserId">
+      <ng-container *ngFor="let msg of messages">
+        <div class="chat__bubble right" *ngIf="msg.to.id !== authUserId">
           <div class="ui segment right">
-            <small>{{ message.from.name }}</small>
-            <p>{{message.message}}</p>
+            <small>{{ msg.from.name }}</small>
+            <p>{{msg.message}}</p>
           </div>
         </div>
-        <div class="chat__bubble left" *ngIf="message.to.id === authUserId">
+        <div class="chat__bubble left" *ngIf="msg.to.id === authUserId">
           <div class="ui segment left">
-            <small>{{ message.from.name }}</small>
-            <p>{{message.message}}</p>
+            <small>{{ msg.from.name }}</small>
+            <p>{{ msg.message }}</p>
           </div>
         </div>
       </ng-container>
@@ -25,11 +25,12 @@
 </main>
 
   <section class="chat__input">
-    <div class="ui action input">
-      <form #sendMessageForm="ngForm" (ngSubmit)="onSubmitSendMessage(sendMessageForm)"></form>
-      <input placeholder="Type..." type="text" [(ngModel)]="message.message">
-      <button type="submit" class="ui button orange">Send</button>
-    </div>
+    <form (ngSubmit)="onSubmitSendMessage(sendMessageForm)" #sendMessageForm="ngForm">
+      <div class="ui action input">
+        <input placeholder="Type..." type="text" name="message"  [(ngModel)]="message.message" #message="ngModel">
+        <button type="submit" class="ui button submit orange">Send</button>
+      </div>
+    </form>
   </section>
 
 

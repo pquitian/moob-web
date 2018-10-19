@@ -1,0 +1,23 @@
+.ui.horizontal.list>.item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap
+}
+
+.user-profile__vehicles {
+    margin-top: 25px;
+}
+
+.user-profile__vehicles article {
+    margin-top: 1em;
+}
+
+.user-profile__contact {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.separated {
+    margin-left: 0.3em;
+}

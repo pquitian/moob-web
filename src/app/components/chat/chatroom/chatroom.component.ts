@@ -32,6 +32,9 @@ export class ChatroomComponent implements OnInit, OnDestroy {
 
     this.authUserId = this.sessionService.user.id;
 
+    this.message.from = this.authUserId;
+    this.message.to = userId;
+
 
     this.chatService.getChatMessages(userId)
       .subscribe((messages: Chat[]) => {
@@ -44,7 +47,6 @@ export class ChatroomComponent implements OnInit, OnDestroy {
     )
     .subscribe((messages: Chat[]) => {
       this.messages = messages;
-      console.log(messages);
     } );
 
   }
@@ -54,9 +56,12 @@ export class ChatroomComponent implements OnInit, OnDestroy {
   }
 
   onSubmitSendMessage(messageForm: FormGroup): void {
-    this.message.from = this.authUserId;
-    this.message.to = this.router.snapshot.params.userId;
-    console.log('MESSAGE', this.message);
+    console.log(messageForm);
+    //const userId = this.router.snapshot.params.userId;
+    //const message = {'message': messageForm.form.value.message};
+    this.message.message = messageForm.form.value.message;
+    this.chatService.createNewMessage(this.message);
+    messageForm.reset();
   }
 
 }

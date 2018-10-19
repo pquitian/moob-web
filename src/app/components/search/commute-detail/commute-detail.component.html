@@ -1,1 +1,52 @@
-{{ commute | json}}
+
+<main>
+    <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="zoom">
+        <agm-direction [origin]="origin" [destination]="destination">
+        </agm-direction>
+    </agm-map>
+
+    <div class="ui container commute">
+        <header>
+            <h4 class="ui header">Commute <br> from <span class="hl">{{ commute.hrOrigin }}</span> to <span class="hl">{{ commute.hrDestination }}</span></h4>
+            <h5 class="ui header grey">
+                {{ commute.departureTime }}
+            </h5>
+        </header>
+
+        <section class="commute__driver">
+            <article>
+                <p>The driver is:</p>
+                <div class="ui list">
+                    <div class="item">
+                        <img class="ui avatar image" src="{{commute.driver.avatar}}">
+                        <div class="content">
+                        <a class="header" [routerLink]="['/users', commute.driver.id]">{{commute.driver.name}}</a>
+                        <div class="description">{{commute.vehicle.brand}} {{commute.vehicle.model}}</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="commute__driver-buttons">
+                <button class="ui basic button teal" (click)="onAddPassenger()">
+                    <i class="icon child"></i>
+                    Join
+                </button>
+    
+                <button class="ui basic button orange" (click)="onContactDriver()">
+                    <i class="icon comment outline"></i>
+                    Contact
+                </button>
+            </article>
+        </section>
+    
+        <section class="commute__passengers" *ngIf="commute.passengers.length">
+            <p>Meet other passengers added to this commute:</p>
+            <div class="ui image label" *ngFor="let passenger of commute.passengers" (click)="gotoUserProfile(passenger.id)">
+                <img src="{{passenger.avatar}}">
+                    {{passenger.name}}
+                <i class="eye icon"></i>
+            </div>
+        </section>
+    </div>
+</main>

@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
 
+
+  apiError: ApiErrors;
   user: User = new User();
   ApiErrors: ApiErrors;
 
@@ -24,7 +26,7 @@ export class SignupComponent {
         .subscribe(()=> {
           signupForm.reset();
           this.router.navigate(['/login']);
-        }, (error: ApiErrors) => this.ApiErrors = error
+        }, (error: ApiErrors) => this.apiError = error
       );
     }
 

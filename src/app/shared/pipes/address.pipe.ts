@@ -8,13 +8,13 @@ export class AddressPipe implements PipeTransform {
 
   constructor(private geoService: GeoService) {}
 
-  transform(coords: number[]): Promise<string> {
-    if (!coords) {
-      return null;
-    } else {
-      return this.geoService.getAddress(coords).then((coordinates) => {
-        return coordinates;
-      });
-    }
+  transform(coords: number[]): Promise<string> | void {
+    // if (!coords) {
+    //   return null;
+    // } else {
+    //   return this.geoService.getAddress(coords).then((coordinates) => {
+    //     return coordinates;
+    //   });
+    // }
   }
 }

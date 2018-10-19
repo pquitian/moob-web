@@ -14,3 +14,7 @@
     background: rgba(255,255,255, 0.7);
     margin: 1em;
 }
+
+.hero-block {
+    margin-top: -36px;
+}

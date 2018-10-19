@@ -8,9 +8,19 @@
 
 .search__actions {
     text-align: center;
+    margin-bottom: 2em;
 
 }
 
 .search__actions p {
     margin: 10px 0 15px;
+}
+
+.search__no-results {
+    padding-top: 2em;
+    color: lightgrey;
+    font-size: 2em;
+    font-weight: 600;
+    line-height: 1.3em;
+    text-align: center;
 }

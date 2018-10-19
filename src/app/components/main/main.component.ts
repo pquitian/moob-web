@@ -22,10 +22,6 @@ export class MainComponent implements OnInit, OnDestroy {
   constructor(private commutesService: CommutesService) { }
 
   ngOnInit() {
-    this.commutesService.listAll()
-      .subscribe((commutes: Commute[]) => {
-      this.commutes = commutes;
-    });
     this.onCommutesChangesSubscription = this.commutesService.onCommutesChanges()
       .subscribe((commutes: Commute[]) => this.commutes = commutes);
   }
@@ -36,7 +32,6 @@ export class MainComponent implements OnInit, OnDestroy {
 
   onSearchFormChanges(criteria: FilterCriteria) {
     if (criteria.origin_lat && criteria.dest_lng && criteria.date_from) {
-      console.log('VOY!');
       this.commutesService.filter(criteria)
         .subscribe((commutes: Commute[]) => {
           this.commutes = commutes;

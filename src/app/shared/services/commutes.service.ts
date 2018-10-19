@@ -17,14 +17,19 @@ export class CommutesService extends BaseApiService {
   private static readonly API_SEARCH = `${BaseApiService.BASE_API}/commutes`;
   private static readonly CURRENT_USER_KEY = 'current-user';
   private static readonly FILTER_ROUTE = 'filter';
-  private readonly HEADERS =  new HttpHeaders().set('Content-Type', 'application/json'), withCredentials: true;
+  private readonly HEADERS =  new HttpHeaders().set('Content-Type', 'application/json');
 
   private commutes: Commute[] = [];
   private commute: Commute = new Commute();
   private commuteSubject: Subject<Array<Commute>> = new Subject();
 
+  userId: any = this.sessionService.user.id;
 
-  constructor(private http: HttpClient) {
+
+  constructor(
+    private http: HttpClient,
+    private sessionService: SessionService
+  ) {
     super();
   }
 
@@ -42,24 +47,28 @@ export class CommutesService extends BaseApiService {
   }
 
   addPassenger(commuteId: string) {
-    return this.http.post<void>(`${CommutesService.API_SEARCH}/${commuteId}`, null, BaseApiService.defaultOptions)
+    return this.http.post<Commute>(`${CommutesService.API_SEARCH}/${commuteId}`, null, BaseApiService.defaultOptions)
       .subscribe((data) => {
-        this.notifyCommuteChanges();
         console.log(data);
+        data.passengers.push(this.userId);
+        // this.commutes.passengers.push(data);
+        this.notifyCommuteChanges();
+        return data;
       });
   }
 
-  /*addPassenger(commuteId: string): Observable<Commute | ApiErrors> {
-    return this.http.post<void>(`${CommutesService.API_SEARCH}/${commuteId}`, null, BaseApiService.defaultOptions)
-      .pipe(
-        map ((commute: Commute) => {
-          this.notifyCommuteChanges();
-          console.log(commute);
-        },
-          catchError(this.handleError)
-        )
-      );
-  }*/
+  // addPassenger(commuteId: string): Observable<Commute | ApiErrors> {
+  //   return this.http.post<User>(`${CommutesService.API_SEARCH}/${commuteId}`, commuteId, BaseApiService.defaultOptions)
+  //     .pipe(
+  //       map((commute: Commute) => {
+  //         this.commutes.push(commute);
+  //         this.notifyCommuteChanges();
+  //         return commute;
+  //       },
+  //         catchError(this.handleError)
+  //       )
+  //     );
+  // }
 
   createCommute(commute: Commute): Observable <Commute | ApiErrors> {
     return this.http.post<Commute>(CommutesService.API_SEARCH, commute,  BaseApiService.defaultOptions)
@@ -73,16 +82,13 @@ export class CommutesService extends BaseApiService {
       );
   }
 
-  filter(criteria: FilterCriteria) {
+  filter(criteria: FilterCriteria): Observable <Commute[] | ApiErrors>  {
     let httpParams = new HttpParams();
       Object.keys(criteria).forEach(function (key) {
       httpParams = httpParams.append(key, criteria[key]);
     });
-
-    
-
     return this.http.get<FilterCriteria>(`${CommutesService.API_SEARCH}/${CommutesService.FILTER_ROUTE}`,
-    { headers: this.HEADERS, params: httpParams})
+    { headers: this.HEADERS, params: httpParams, withCredentials: true })
       .pipe(
         map((commutes: Commute[]) => {
           commutes = commutes.map(commute => Object.assign(new Commute(), commute));

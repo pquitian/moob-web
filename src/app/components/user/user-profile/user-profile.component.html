@@ -1,3 +1,31 @@
-<p>
-  user-profile works!
-</p>
+<main class="ui container user-profile">
+  <header>
+    <img class="ui centered circular image" src="{{user.avatar}}">
+    <h2 class="ui centered header"> {{user.name}}</h2>
+  </header>
+  
+  <section class="user-profile__contact">
+    <button *ngIf="user.id !== authUserId" class="ui basic centered button orange" (click)="onSendMessage(user.id)">
+        <i class="icon comment outline"></i>
+        Send message
+    </button>
+  </section>
+  <section class="user-profile__vehicles" *ngIf="user.vehicles.length">
+    <p>
+      User's vehicles: 
+    </p>
+    <article *ngFor="let vehicle of user.vehicles">
+        <div class="ui horizontal list">
+            <div class="item">
+              <div>
+                <i class="circular inverted teal car icon"></i>
+              </div>
+              <div class="content separated">
+                <div class="ui sub header">{{ vehicle.brand }} {{vehicle.model}}</div>
+                {{vehicle.fuel}}
+              </div>
+            </div>
+        </div>
+      </article>
+  </section>
+</main>

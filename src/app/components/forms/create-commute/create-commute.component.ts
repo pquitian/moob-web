@@ -1,3 +1,4 @@
+import { ApiErrors } from './../../../shared/models/api-errors.model';
 import { GeoService } from './../../../shared/services/geo.service';
 import { VehiclesService } from './../../../shared/services/vehicles.service';
 import { Vehicle } from './../../../shared/models/vehicle.model';
@@ -19,6 +20,7 @@ import { Coordinates } from 'src/app/shared/models/coordinates.model';
 })
 export class CreateCommuteComponent implements OnInit, OnDestroy {
 
+  apiError: ApiErrors;
   commute: Commute = new Commute();
   authUser: User = new User();
   onAuthUserChanges: Subscription = new Subscription();

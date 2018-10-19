@@ -1,8 +1,10 @@
+import { SessionService } from './../../../shared/services/session.service';
+import { Coordinates } from './../../../shared/models/coordinates.model';
 import { map } from 'rxjs/operators';
 import { CommutesService } from './../../../shared/services/commutes.service';
 import { Component, OnInit } from '@angular/core';
 import { Commute } from 'src/app/shared/models/commute.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-commute-detail',
@@ -13,16 +15,47 @@ export class CommuteDetailComponent implements OnInit {
 
   commute: Commute = new Commute();
 
+  origin: Coordinates;
+  destination: Coordinates;
+  userId: string;
+
   constructor(
     private commutesService: CommutesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private sessionService: SessionService
   ) { }
 
   ngOnInit() {
     this.route.data
-      .pipe(
-        map((data => data.commute))
+    .pipe(
+      map((data => data.commute))
       ).subscribe((commute: Commute) => this.commute = commute);
+
+    this.setCoordinates();
+    this.userId = this.sessionService.user.id;
+  }
+
+  gotoUserProfile(id: string): void {
+    this.router.navigate(['/users', id]);
+  }
+
+  onAddPassenger(): void {
+    this.commutesService.addPassenger(this.commute.id);
+  }
+
+  onContactDriver() {
+    this.router.navigate(['/users', this.userId, 'messages', this.commute.driver.id]);
+  }
+
+  private setCoordinates() {
+    const originLat = this.commute.origin[0];
+    const originLng = this.commute.origin[1];
+    const destinationLat = this.commute.destination[0];
+    const destinationLng = this.commute.destination[1];
+
+    this.origin = { lat: originLat, lng: originLng };
+    this.destination = { lat: destinationLat, lng: destinationLng };
   }
 
 }

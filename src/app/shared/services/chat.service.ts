@@ -27,22 +27,28 @@ export class ChatService extends BaseApiService {
     super();
   }
 
-  createNewMessage(message: Chat, userId: string): Observable <Chat | ApiErrors> {
-    return this.http.post<Chat>(`${ChatService.API_CHAT}/${this.sessionService.user.id}/${ChatService.MESSAGE_PATH}/${userId}`,
+  createNewMessage(message: Chat): Observable <Chat | ApiErrors> {
+    console.log('ey!!!');
+    console.log('message', message);
+    //console.log('userId', userId);
+    console.log(`${ChatService.API_CHAT}/${this.sessionService.user.id}/${ChatService.MESSAGE_PATH}/${message.to}`);
+    return this.http.post<Chat>(`${ChatService.API_CHAT}/${this.sessionService.user.id}/${ChatService.MESSAGE_PATH}/${message.to}/create`,
     message,
     BaseApiService.defaultOptions)
     .pipe(
       map((chat: Chat) => {
+        console.log('HHHOOOOO');
         chat = Object.assign(new Chat(), chat);
         this.messages.push(chat);
         this.notifyChatChanges();
         return chat;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
-  listInbox(): Observable <Chat[] | ApiErrors> {
-    return this.http.get<void>(`${ChatService.API_CHAT}/${this.sessionService.user.id}/${ChatService.MESSAGE_PATH}/`)
+  listInbox(authUserId: string): Observable <Chat[] | ApiErrors> {
+    return this.http.get<void>(`${ChatService.API_CHAT}/${authUserId}/${ChatService.MESSAGE_PATH}/`, BaseApiService.defaultOptions)
       .pipe(
         map((messages: Chat[]) => {
           messages = messages.map(message => Object.assign(new Chat(), message));

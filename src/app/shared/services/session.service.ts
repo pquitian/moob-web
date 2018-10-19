@@ -20,7 +20,6 @@ export class SessionService extends BaseApiService {
   constructor(private http: HttpClient) {
     super();
     const userData = localStorage.getItem(SessionService.CURRENT_USER_KEY);
-    // console.log(JSON.parse(userData).id);
     if (userData) {
       this.user = Object.assign(new User(), JSON.parse(userData));
     }
@@ -69,9 +68,9 @@ export class SessionService extends BaseApiService {
     localStorage.setItem(SessionService.CURRENT_USER_KEY, JSON.stringify(this.user));
     this.notifyUserChanges();
   }
-  //TODO: logout()
 
   private doLogout(): void {
+    console.log('logout, bye!');
     this.user = null;
     localStorage.removeItem(SessionService.CURRENT_USER_KEY);
     this.notifyUserChanges();

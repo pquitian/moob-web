@@ -1,6 +1,3 @@
-<!--<ng-template let-result let-query="query" #template>
-    {{ result.title }} ({{ result.index }})
-</ng-template>-->
 <main class="search">
     <section class="ui container">
         <div class="search__actions">
@@ -14,8 +11,16 @@
 
   <app-searcher (criteriaUpdate)="onSearchFormChanges($event)"></app-searcher>
 
-  <section class="ui container search__results">
+  <section class="ui container search__results" *ngIf="commutes.length; else noresults">
       <app-search-list *ngFor="let commute of commutes" [commute]="commute"></app-search-list>
   </section>
 
+  <ng-template #noresults>
+      <section class="search__no-results ui container">
+          <p>
+              Please, fill all the fields to search a commute
+          </p>
+        <i class="spinner loading icon"></i>
+      </section>
+  </ng-template>
 </main>
