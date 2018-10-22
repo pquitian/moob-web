@@ -59,9 +59,10 @@ export class ChatroomComponent implements OnInit, OnDestroy {
     console.log(messageForm);
     //const userId = this.router.snapshot.params.userId;
     //const message = {'message': messageForm.form.value.message};
-    this.message.message = messageForm.form.value.message;
-    this.chatService.createNewMessage(this.message);
-    messageForm.reset();
+    this.message.message = messageForm.value.message;
+    this.chatService.createNewMessage(this.message).subscribe(() => {
+      messageForm.reset();      
+    });
   }
 
 }
