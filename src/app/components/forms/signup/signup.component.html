@@ -9,28 +9,37 @@
           <i class="user icon"></i>
           <input type="text" required name="name" [(ngModel)]="user.name" placeholder="User Name" #name="ngModel" required>
         </div>
-        <div class="ui error message" *ngIf="name.errors && name.touched && name.errors.email">
+        <!--Name errors-->
+        <div class="ui error message" *ngIf="name.errors && name.touched && name.errors.required">
           We need your name :)
         </div>
+        <!---->
       </div>
+
       <div class="field" [ngClass]="{ 'error' : apiError || email.errors && email.touched }">
         <div class="ui left icon input">
           <i class="mail icon"></i>
           <input type="text" required name="email" [(ngModel)]="user.email" placeholder="email" #email="ngModel">
         </div>
-        <div class="ui error message" *ngIf="email.errors && email.touched && email.errors.email">
+        <!--Email errors-->
+        <div class="ui error message" *ngIf="email.errors && email.touched && email.errors.required">
           Please, write a valid email
         </div>
+        <!---->
       </div>
+
       <div class="field" [ngClass]="{ 'error' : apiError || password.errors && password.touched }">
         <div class="ui left icon input">
           <i class="lock icon"></i>
           <input type="password" required name="password" [(ngModel)]="user.password" placeholder="password" #password="ngModel">
         </div>
-        <div class="ui error message" *ngIf="password.errors && password.touched && password.errors.email">
+        <!--Password errors-->
+        <div class="ui error message" *ngIf="password.errors && password.touched && password.errors.required">
           Choose a password
-        S</div>
+        </div>
+        <!---->
       </div>
+
       <button type="submit" class="ui fluid large teal submit button" [ngClass]="{ 'disabled' : !signupForm.valid }">Let's go inside!</button>
     </div>
 
