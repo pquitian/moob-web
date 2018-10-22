@@ -19,7 +19,7 @@ export class CommutesService extends BaseApiService {
   private static readonly FILTER_ROUTE = 'filter';
   private readonly HEADERS =  new HttpHeaders().set('Content-Type', 'application/json');
 
-  private commutes: Commute[] = [];
+  commutes: Commute[] = [];
   private commute: Commute = new Commute();
   private commuteSubject: Subject<Array<Commute>> = new Subject();
 

@@ -37,5 +37,4 @@ export class SearchListComponent implements OnInit {
     this.commutesService.addPassenger(this.commute.id);
   }
 
-
 }

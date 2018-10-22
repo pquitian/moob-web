@@ -22,6 +22,7 @@ export class MainComponent implements OnInit, OnDestroy {
   constructor(private commutesService: CommutesService) { }
 
   ngOnInit() {
+    this.commutes = this.commutesService.commutes;
     this.onCommutesChangesSubscription = this.commutesService.onCommutesChanges()
       .subscribe((commutes: Commute[]) => this.commutes = commutes);
   }
