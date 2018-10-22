@@ -14,10 +14,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CommuteDetailComponent implements OnInit {
 
   commute: Commute = new Commute();
-
+  lng: number;
+  lat: number;
   origin: Coordinates;
   destination: Coordinates;
   userId: string;
+  zoom: number;
 
   constructor(
     private commutesService: CommutesService,
@@ -34,6 +36,7 @@ export class CommuteDetailComponent implements OnInit {
 
     this.setCoordinates();
     this.userId = this.sessionService.user.id;
+    this.zoom = 12;
   }
 
   gotoUserProfile(id: string): void {
