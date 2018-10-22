@@ -44,7 +44,9 @@ export class CommuteDetailComponent implements OnInit {
   }
 
   onAddPassenger(): void {
-    this.commutesService.addPassenger(this.commute.id);
+    this.commutesService.addPassenger(this.commute.id).subscribe((commute: Commute) => {
+      this.commute = commute;
+    });
   }
 
   onContactDriver() {

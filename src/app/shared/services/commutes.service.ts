@@ -46,29 +46,18 @@ export class CommutesService extends BaseApiService {
       );
   }
 
-  addPassenger(commuteId: string) {
-    return this.http.post<Commute>(`${CommutesService.API_SEARCH}/${commuteId}`, null, BaseApiService.defaultOptions)
-      .subscribe((data) => {
-        console.log(data);
-        data.passengers.push(this.userId);
-        // this.commutes.passengers.push(data);
-        this.notifyCommuteChanges();
-        return data;
-      });
+  addPassenger(commuteId: string): Observable<Commute | ApiErrors> {
+    return this.http.post<User>(`${CommutesService.API_SEARCH}/${commuteId}`, null, BaseApiService.defaultOptions)
+      .pipe(
+        map((commute: Commute) => {
+          // this.commutes.push(commute);
+          this.notifyCommuteChanges();
+          return commute;
+        },
+          catchError(this.handleError)
+        )
+      );
   }
-
-  // addPassenger(commuteId: string): Observable<Commute | ApiErrors> {
-  //   return this.http.post<User>(`${CommutesService.API_SEARCH}/${commuteId}`, commuteId, BaseApiService.defaultOptions)
-  //     .pipe(
-  //       map((commute: Commute) => {
-  //         this.commutes.push(commute);
-  //         this.notifyCommuteChanges();
-  //         return commute;
-  //       },
-  //         catchError(this.handleError)
-  //       )
-  //     );
-  // }
 
   createCommute(commute: Commute): Observable <Commute | ApiErrors> {
     return this.http.post<Commute>(CommutesService.API_SEARCH, commute,  BaseApiService.defaultOptions)

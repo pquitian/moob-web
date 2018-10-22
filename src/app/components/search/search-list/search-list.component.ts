@@ -33,8 +33,10 @@ export class SearchListComponent implements OnInit {
     this.router.navigate(['/commute', id]);
   }
 
-  addPassenger(): any {
-    this.commutesService.addPassenger(this.commute.id);
+  onAddPassenger(): void {
+    this.commutesService.addPassenger(this.commute.id).subscribe((commute: Commute) => {
+      this.commute = commute;
+    });
   }
 
 }
