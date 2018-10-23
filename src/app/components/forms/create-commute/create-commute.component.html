@@ -35,7 +35,7 @@
       <div class="field" [ngClass]="{ 'error' : apiError || vehicle.errors && vehicle.touched }">
           <select class="ui fluid dropdown" name="vehicle" [(ngModel)]="commute.vehicle" #vehicle="ngModel" required>
             <option [ngValue]="null" selected disabled>Select one...</option>
-            <option *ngFor="let vehicle of authUser.vehicles"  [ngValue]="vehicle.id">{{ vehicle.brand }} {{ vehicle.model }}</option>
+            <option *ngFor="let vehicle of authUser.vehicles" [ngValue]="vehicle">{{ vehicle.brand }} {{ vehicle.model }}</option>
           </select>
       </div>
     </div>

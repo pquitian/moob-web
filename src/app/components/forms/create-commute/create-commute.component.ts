@@ -83,7 +83,10 @@ export class CreateCommuteComponent implements OnInit, OnDestroy {
     if (commuteForm.valid && this.isVehicleFormValid) {
       this.vehiclesService.create(this.authUser.id, this.createVehicle.vehicle)
       .subscribe((user: User) => {
-        this.commute.vehicle = user.vehicles[0];
+        this.vehicle =  user.vehicles[0];
+        this.commute.vehicle = this.vehicle;
+        this.authUser.vehicles.push(this.vehicle);
+        console.log('THIS VH -->', this.vehicle);
         this.commutesService.createCommute(this.commute)
         .subscribe((commute: Commute) => {
           commuteForm.reset();
