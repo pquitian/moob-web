@@ -15,8 +15,8 @@ export class VehiclesService extends BaseApiService {
   private static readonly API_USERS = `${BaseApiService.BASE_API}/users`;
   private static readonly API_VEHICLES = '/vehicles';
 
-  vehicles: Vehicle[] = [];
-  vehiclesSubject: Subject<Vehicle[]> = new Subject();
+  user: User = new User();
+  userSubject: Subject<User> = new Subject();
 
   constructor(
     private http: HttpClient
@@ -24,29 +24,29 @@ export class VehiclesService extends BaseApiService {
     super();
   }
 
-  create(userId: string, vehicle: Vehicle): Observable<Vehicle | ApiErrors> {
+  create(userId: string, vehicle: Vehicle): Observable<User | ApiErrors> {
     return this.http.post<Vehicle>(
       `${VehiclesService.API_USERS}/${userId}${VehiclesService.API_VEHICLES}`,
       vehicle,
       BaseApiService.defaultOptions
     ).pipe(
-      map((vehicle: Vehicle) => {
-        vehicle = Object.assign(new Vehicle(), vehicle);
-        this.vehicles.push(vehicle);
-        this.notifyVehiclesChanges();
-        console.log('VH-->', vehicle);
-        return vehicle;
+      map((user: User) => {
+        user = Object.assign(new User(), user);
+        this.user = user;
+        this.notifyUserChanges();
+        console.log('VH-->', user);
+        return user;
       }),
       catchError(this.handleError)
     );
   }
 
-  onVehiclesChanges(): Observable <Array<Vehicle>> {
-    return this.vehiclesSubject.asObservable();
+  onUserChanges(): Observable <User> {
+    return this.userSubject.asObservable();
   }
 
-  private notifyVehiclesChanges(): void {
-    this.vehiclesSubject.next(this.vehicles);
+  private notifyUserChanges(): void {
+    this.userSubject.next(this.user);
   }
 
 }
