@@ -33,7 +33,7 @@ export class CommutesService extends BaseApiService {
     super();
   }
 
-  listAll(): Observable<Commute[] | ApiErrors> {
+  /*listAll(): Observable<Commute[] | ApiErrors> {
     return this.http.get<Commute[]>(CommutesService.API_SEARCH, BaseApiService.defaultOptions)
       .pipe(
         map((commutes: Commute[]) => {
@@ -44,7 +44,7 @@ export class CommutesService extends BaseApiService {
         }),
         catchError(this.handleError)
       );
-  }
+  }*/
 
   addPassenger(commuteId: string): Observable<Commute | ApiErrors> {
     return this.http.post<User>(`${CommutesService.API_SEARCH}/${commuteId}`, null, BaseApiService.defaultOptions)
@@ -60,11 +60,12 @@ export class CommutesService extends BaseApiService {
   }
 
   createCommute(commute: Commute): Observable <Commute | ApiErrors> {
+    console.log('COMMUTEEEE -->', commute);
     return this.http.post<Commute>(CommutesService.API_SEARCH, commute,  BaseApiService.defaultOptions)
       .pipe(
         map((commute: Commute) => {
-          commute = Object.assign(new Commute(), commute);
-          this.commutes.push(commute);
+          // commute = Object.assign(new Commute(), commute);
+          // this.commutes.push(commute);
           this.notifyCommuteChanges();
           return commute;
         })

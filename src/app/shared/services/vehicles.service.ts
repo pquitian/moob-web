@@ -27,13 +27,14 @@ export class VehiclesService extends BaseApiService {
   create(userId: string, vehicle: Vehicle): Observable<Vehicle | ApiErrors> {
     return this.http.post<Vehicle>(
       `${VehiclesService.API_USERS}/${userId}${VehiclesService.API_VEHICLES}`,
-      vehicle, 
+      vehicle,
       BaseApiService.defaultOptions
     ).pipe(
       map((vehicle: Vehicle) => {
         vehicle = Object.assign(new Vehicle(), vehicle);
         this.vehicles.push(vehicle);
         this.notifyVehiclesChanges();
+        console.log('VH-->', vehicle);
         return vehicle;
       }),
       catchError(this.handleError)
