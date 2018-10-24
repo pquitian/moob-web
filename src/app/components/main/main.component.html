@@ -9,18 +9,25 @@
         </div>
     </section>
 
-  <app-searcher (criteriaUpdate)="onSearchFormChanges($event)"></app-searcher>
+  <app-searcher (criteriaUpdate)="onSearchFormChanges($event)" #searcher></app-searcher>
 
   <section class="ui container search__results" *ngIf="commutes.length; else noresults">
       <app-search-list *ngFor="let commute of commutes" [commute]="commute"></app-search-list>
   </section>
 
   <ng-template #noresults>
-      <section class="search__no-results ui container">
-          <p>
-              Please, fill all the fields to search a commute
-          </p>
+    <section class="search__no-results ui container" *ngIf="zeroResults">
+        <p>
+            Sorry, there are no results with your search criteria
+            :(
+        </p>
+    </section>
+    <section class="search__no-results ui container" *ngIf="!zeroResults">
+        <p>
+            Please, fill all the fields to search a commute
+        </p>
         <i class="spinner loading icon"></i>
-      </section>
+    </section>
+
   </ng-template>
 </main>

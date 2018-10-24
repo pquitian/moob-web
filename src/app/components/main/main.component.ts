@@ -14,6 +14,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   commutes: Commute[] = [];
   onCommutesChangesSubscription: Subscription;
+  zeroResults: boolean = false;
 
   criteria: FilterCriteria = new FilterCriteria();
 
@@ -35,7 +36,11 @@ export class MainComponent implements OnInit, OnDestroy {
     if (criteria.origin_lat && criteria.dest_lng && criteria.date_from) {
       this.commutesService.filter(criteria)
         .subscribe((commutes: Commute[]) => {
-          this.commutes = commutes;
+          if (commutes.length > 0) {
+            this.commutes = commutes;
+          } else {
+            this.zeroResults = true;
+          }
         });
 
     }

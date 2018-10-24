@@ -28,16 +28,11 @@ export class ChatService extends BaseApiService {
   }
 
   createNewMessage(message: Chat): Observable <Chat | ApiErrors> {
-    console.log('ey!!!');
-    console.log('message', message);
-    //console.log('userId', userId);
-    console.log(`${ChatService.API_CHAT}/${this.sessionService.user.id}/${ChatService.MESSAGE_PATH}/${message.to}`);
     return this.http.post<Chat>(`${ChatService.API_CHAT}/${this.sessionService.user.id}/${ChatService.MESSAGE_PATH}/${message.to}/create`,
     message,
     BaseApiService.defaultOptions)
     .pipe(
       map((chat: Chat) => {
-        console.log('HHHOOOOO');
         chat = Object.assign(new Chat(), chat);
         this.messages.push(chat);
         this.notifyChatChanges();
