@@ -44,3 +44,8 @@
 .chat__bubble.left {
     justify-content: flex-start;
 }
+
+.right .ui.list>.item>.content {
+    display: inline-block;
+    padding-right: 0.5em;
+}

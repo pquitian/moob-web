@@ -1,21 +1,41 @@
 <main class="chat ui container">
-  <header class="chat__header">
-    
-
-  </header>
   <section class="chat__messages">
     <ng-container *ngIf="messages">
       <ng-container *ngFor="let msg of messages">
         <div class="chat__bubble right" *ngIf="msg.to.id !== authUserId">
           <div class="ui segment right">
-            <small>{{ msg.from.name }}</small>
+            <div class="ui list">
+              <div class="item">
+                <div class="content">
+                  <span>{{msg.from.name}}</span>
+                  <div class="description">
+                    <small>{{msg.createdAt}}</small>
+                  </div>
+                </div>
+                <img class="ui avatar image" src="{{msg.from.avatar}}">
+              </div>
+            </div>
+            <!--<small>{{ msg.from.name }}</small>-->
             <p>{{msg.message}}</p>
+            <!--<p>{{msg.createdAt}}</p>-->
           </div>
         </div>
         <div class="chat__bubble left" *ngIf="msg.to.id === authUserId">
           <div class="ui segment left">
-            <small>{{ msg.from.name }}</small>
+            <div class="ui list">
+                <div class="item">
+                    <img class="ui avatar image" src="{{msg.from.avatar}}">
+                    <div class="content">
+                      <span>{{msg.from.name}}</span>
+                      <div class="description">
+                        <small>{{msg.createdAt}}</small>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <!--<small>{{ msg.from.name }}</small>-->
             <p>{{ msg.message }}</p>
+            <!--<p>{{msg.createdAt}}</p>-->
           </div>
         </div>
       </ng-container>
