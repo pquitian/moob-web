@@ -28,4 +28,26 @@
         </div>
       </article>
   </section>
+
+  
+  <section class="ui segments" *ngIf="authUserCommutes">
+    <div class="ui segment" *ngFor="let commute of authUserCommutes">
+      <p> <a [routerLink]="['/commute', commute.id]">{{commute.hrOrigin}} - {{commute.hrDestination}}</a> 
+      <br>
+      <small>{{commute.departureTime}}</small>
+    </p>
+
+      <div *ngIf="commute.passengers.length">
+        <p>Passengers added:</p>
+        <ng-container *ngFor="let passenger of commute.passengers">
+          <a class="ui image label" [routerLink]="['/users', passenger.id]">
+            <img src="{{ passenger.avatar }}">
+              {{ passenger.name }}
+          </a>
+        </ng-container>
+      </div>
+
+    </div>
+  </section>
+
 </main>

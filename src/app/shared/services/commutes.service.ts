@@ -15,11 +15,12 @@ import { HttpClient, HttpParams, HttpHeaders  } from '@angular/common/http';
 export class CommutesService extends BaseApiService {
 
   private static readonly API_SEARCH = `${BaseApiService.BASE_API}/commutes`;
-  private static readonly CURRENT_USER_KEY = 'current-user';
   private static readonly FILTER_ROUTE = 'filter';
+  private static readonly MY_COMMUTES_ROUTE = 'getall';
   private readonly HEADERS =  new HttpHeaders().set('Content-Type', 'application/json');
 
   commutes: Commute[] = [];
+  userCommutes: Commute[] = [];
   private commute: Commute = new Commute();
   private commuteSubject: Subject<Array<Commute>> = new Subject();
 
@@ -32,19 +33,6 @@ export class CommutesService extends BaseApiService {
   ) {
     super();
   }
-
-  /*listAll(): Observable<Commute[] | ApiErrors> {
-    return this.http.get<Commute[]>(CommutesService.API_SEARCH, BaseApiService.defaultOptions)
-      .pipe(
-        map((commutes: Commute[]) => {
-          commutes = commutes.map(commute => Object.assign(new Commute(), commute));
-          this.commutes = commutes;
-          this.notifyCommuteChanges();
-          return commutes;
-        }),
-        catchError(this.handleError)
-      );
-  }*/
 
   addPassenger(commuteId: string): Observable<Commute | ApiErrors> {
     return this.http.post<User>(`${CommutesService.API_SEARCH}/${commuteId}`, null, BaseApiService.defaultOptions)
@@ -90,11 +78,21 @@ export class CommutesService extends BaseApiService {
       );
   }
 
-  getOne(commuteId: string): Observable <Commute | ApiErrors>{
+  getOne(commuteId: string): Observable <Commute | ApiErrors> {
     return this.http.get<Commute>(`${CommutesService.API_SEARCH}/${commuteId}`, BaseApiService.defaultOptions)
       .pipe(
         map((commute: Commute) => Object.assign(new Commute(), commute)),
         catchError(this.handleError));
+  }
+
+  getUserCommutes(): Observable <Commute[] | ApiErrors> {
+    return this.http.get<Commute>(`${CommutesService.API_SEARCH}/${CommutesService.MY_COMMUTES_ROUTE}`, BaseApiService.defaultOptions)
+      .pipe(
+        map((commutes: Commute[]) => {
+          return commutes;
+        }),
+        catchError(this.handleError)
+      );
   }
 
 
