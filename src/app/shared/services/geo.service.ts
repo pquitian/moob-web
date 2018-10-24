@@ -32,6 +32,7 @@ export class GeoService {
         const autocomplete = new google.maps.places.Autocomplete(searchElementRef.nativeElement, {
           types: ['address']
         });
+        autocomplete.setComponentRestrictions({'country' : 'ES'});
         autocomplete.addListener('place_changed', () => {
           this.ngZone.run(() => {
             // It gets the place result
@@ -57,6 +58,7 @@ export class GeoService {
         const autocomplete = new google.maps.places.Autocomplete(searcElementRef.nativeElement, {
           types: ['address']
         });
+        autocomplete.setComponentRestrictions({'country' : 'ES'});
         autocomplete.addListener('place_changed', () => {
           this.ngZone.run(() => {
             // It gets the place result
