@@ -63,4 +63,12 @@ export class CommuteDetailComponent implements OnInit {
     this.destination = { lat: destinationLat, lng: destinationLng };
   }
 
+  private isMe() {
+    if (this.userId === this.commute.driver.id) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }

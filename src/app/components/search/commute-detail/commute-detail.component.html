@@ -28,12 +28,16 @@
             </article>
 
             <article class="commute__driver-buttons">
-                <button class="ui basic button teal" (click)="onAddPassenger()">
+                <button class="ui basic button teal" 
+                    (click)="onAddPassenger()"
+                    [disabled]="isMe()">
                     <i class="icon child"></i>
                     Join
                 </button>
     
-                <button class="ui basic button orange" (click)="onContactDriver()">
+                <button class="ui basic button orange" 
+                    (click)="onContactDriver()"
+                    [disabled]="isMe()">
                     <i class="icon comment outline"></i>
                     Contact
                 </button>
