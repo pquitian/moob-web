@@ -6,6 +6,8 @@ import { CommutesService } from './../../../shared/services/commutes.service';
 import { Router } from '@angular/router';
 import { Commute } from './../../../shared/models/commute.model';
 import { Component, OnInit, Input } from '@angular/core';
+import {TransitionController, Transition, TransitionDirection} from 'ng2-semantic-ui';
+
 
 
 @Component({
@@ -16,6 +18,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SearchListComponent implements OnInit {
 
   authId: string;
+  transitionController = new TransitionController();
   @Input() commute: Commute = new Commute();
 
   constructor(
@@ -27,6 +30,7 @@ export class SearchListComponent implements OnInit {
 
   ngOnInit() {
     this.authId = this.sessionService.user.id;
+    this.animate();
   }
 
   openDetail(id: string): void {
@@ -37,6 +41,11 @@ export class SearchListComponent implements OnInit {
     this.commutesService.addPassenger(this.commute.id).subscribe((commute: Commute) => {
       this.commute = commute;
     });
+  }
+
+  public animate() {
+    this.transitionController.animate(
+        new Transition('scale', 500, TransitionDirection.In, () => console.log('Completed transition')));
   }
 
 }

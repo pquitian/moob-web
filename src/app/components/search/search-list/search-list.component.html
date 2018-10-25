@@ -1,10 +1,12 @@
 
 
-<article class="ui card grid commute-card">
+<article class="ui card grid commute-card" [suiTransition]="transitionController">
+
   <div class="extra content separator">
     <i class="inverted car icon"></i>
     <span class="inverted" *ngIf="commute.vehicle">{{ commute.vehicle.brand }} {{ commute.vehicle.model }}</span>
   </div>
+
   <div class="ui row commute-card__info">
     <div class="eleven wide column">
         <small>Origin:</small> <p>{{ commute.hrOrigin }}</p>
@@ -25,29 +27,25 @@
     </div>
   </div>
   <div class="content">
-    
-  <div class="meta">
-    <!--<span class="right floated time">{{commute.departureTime}}</span>
-    <span class="category">Something here</span>-->
+
+  <div class="description">
+    <p></p>
+    <div class="ui two buttons">
+      <div class="ui basic teal button" (click)="onAddPassenger()">Join</div>
+      <div class="ui basic orange button" (click)="openDetail(commute.id)">View details</div>
+    </div>
   </div>
-    <div class="description">
-      <p></p>
-      <div class="ui two buttons">
-        <div class="ui basic teal button" (click)="onAddPassenger()">Join</div>
-        <div class="ui basic orange button" (click)="openDetail(commute.id)">View details</div>
-      </div>
+  <div class="commute-card__passengers">
+    <div class="meta" *ngIf="commute.passengers.length">
+      <small>Other passengers:</small>
     </div>
-    <div class="commute-card__passengers">
-      <div class="meta" *ngIf="commute.passengers.length">
-        <small>Other passengers:</small>
-      </div>
-      <ng-container *ngFor="let passenger of commute.passengers">
-          <a class="ui image label" [routerLink]="['/users', passenger.id]">
-              <img src="{{ passenger.avatar }}">
-              {{ passenger.name }}
-          </a>
-      </ng-container>
-    </div>
+    <ng-container *ngFor="let passenger of commute.passengers">
+        <a class="ui image label" [routerLink]="['/users', passenger.id]">
+            <img src="{{ passenger.avatar }}">
+            {{ passenger.name }}
+        </a>
+    </ng-container>
+  </div>
   </div>
   <div class="extra content separator">
   </div>

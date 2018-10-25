@@ -1,4 +1,4 @@
-import { UserService, UserService } from './../../../shared/services/user.service';
+import { UserService } from './../../../shared/services/user.service';
 import { User } from './../../../shared/models/user.model';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
