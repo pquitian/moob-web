@@ -18,10 +18,10 @@
         <img class="ui avatar image" [src]="commute.driver.avatar">
         <p class="user-name">{{commute.driver.name}}</p>
       </a> 
-      <a class="ui icon" [routerLink]="['/users', authId, 'messages' ,commute.driver.id]">
+      <a class="ui icon" [routerLink]="['/users', authId, 'messages' ,commute.driver.id]" *ngIf="!isMine()">
         <i class="icon comments teal"></i>
       </a>
-      <a class="ui icon" [routerLink]="['/users', commute.driver.id]">
+      <a class="ui icon" [routerLink]="['/users', commute.driver.id]" *ngIf="!isMine()">
         <i class="icon eye orange"></i>
       </a> 
     </div>
@@ -31,8 +31,15 @@
   <div class="description">
     <p></p>
     <div class="ui two buttons">
-      <div class="ui basic teal button" (click)="onAddPassenger()">Join</div>
-      <div class="ui basic orange button" (click)="openDetail(commute.id)">View details</div>
+      <button class="ui basic teal button" 
+      (click)="onAddPassenger()"
+      [disabled]="isMine()"
+      >Join</button>
+
+      <button class="ui basic orange button" 
+      (click)="openDetail(commute.id)"
+      [disabled]="isMine()"
+      >View details</button>
     </div>
   </div>
   <div class="commute-card__passengers">
