@@ -24,7 +24,7 @@
           <div class="ui segment left">
             <div class="ui list">
                 <div class="item">
-                    <img class="ui avatar image" src="{{msg.from.avatar}}">
+                    <img class="ui avatar image" src="{{msg.from.avatar}}" [routerLink]="['/users', msg.from.id]">
                     <div class="content">
                       <small>{{msg.from.name}}</small>
                       <div class="description">
