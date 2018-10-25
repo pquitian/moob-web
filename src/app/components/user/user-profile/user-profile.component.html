@@ -29,25 +29,69 @@
       </article>
   </section>
 
-  
-  <section class="ui segments" *ngIf="authUserCommutes">
-    <div class="ui segment" *ngFor="let commute of authUserCommutes">
-      <p> <a [routerLink]="['/commute', commute.id]">{{commute.hrOrigin}} - {{commute.hrDestination}}</a> 
-      <br>
-      <small>{{commute.departureTime}}</small>
-    </p>
+  <!--User's commutes-->
 
-      <div *ngIf="commute.passengers.length">
-        <p>Passengers added:</p>
-        <ng-container *ngFor="let passenger of commute.passengers">
-          <a class="ui image label" [routerLink]="['/users', passenger.id]">
-            <img src="{{ passenger.avatar }}">
-              {{ passenger.name }}
-          </a>
-        </ng-container>
-      </div>
-
+  <sui-tabset class="user-profile__commutes" *ngIf="user.id === authUserId">
+    <div class="ui pointing secondary menu">
+        <a class="item" suiTabHeader="1">Your commutes</a>
+        <a class="item" suiTabHeader="2">As passenger</a>
     </div>
-  </section>
+    <div class="ui" suiTabContent="1">
+      <!--If user has created commutes-->
+      <section *ngIf="authUserCommutes.length; else noCommutes">
+        <article class="ui segment" *ngFor="let commute of authUserCommutes">
+          <p> <a [routerLink]="['/commute', commute.id]">{{commute.hrOrigin}} - {{commute.hrDestination}}</a> 
+            <br>
+            <small>{{commute.departureTime}}</small>
+          </p>
+          <div *ngIf="commute.passengers.length">
+            <p>Passengers added:</p>
+            <ng-container *ngFor="let passenger of commute.passengers">
+              <a class="ui image label" [routerLink]="['/users', passenger.id]">
+                <img src="{{ passenger.avatar }}">
+                  {{ passenger.name }}
+              </a>
+            </ng-container>
+          </div>
+        </article>
+      </section>
+      <!--//commutes created//-->
 
+      <!--If user has no commutes-->
+      <ng-template #noCommutes>
+        You have not created any commute yet. Your published commute will appear here.
+      </ng-template>
+      <!---->
+    </div>
+
+    <div class="ui" suiTabContent="2">
+      <!--If user is a passenger-->
+      <section *ngIf="authUserPassenger.length; else noPassenger">
+        <article class="ui segment" *ngFor="let commute of authUserPassenger">
+          <p> <a [routerLink]="['/commute', commute.id]">{{commute.hrOrigin}} - {{commute.hrDestination}}</a> 
+            <br>
+            <small>{{commute.departureTime}}</small>
+          </p>
+          <div *ngIf="commute.passengers.length">
+            <p>Passengers added:</p>
+            <ng-container *ngFor="let passenger of commute.passengers">
+              <a class="ui image label" [routerLink]="['/users', passenger.id]">
+                <img src="{{ passenger.avatar }}">
+                  {{ passenger.name }}
+              </a>
+            </ng-container>
+          </div>
+        </article>
+      </section>
+      <!---->
+
+      <!--If user is not a passenger-->
+      <ng-template #noPassenger>
+        You have not joined any travel yet.
+      </ng-template>
+      <!---->
+    </div>
+  </sui-tabset>
+  
+  <!---->
 </main>

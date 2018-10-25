@@ -15,6 +15,7 @@ export class UserProfileComponent implements OnInit {
 
   authUserId: string;
   authUserCommutes: Commute[];
+  authUserPassenger: Commute[];
   userId: string;
   user: User = new User();
 
@@ -33,6 +34,9 @@ export class UserProfileComponent implements OnInit {
     if (this.userId === this.authUserId) {
       this.commutesService.getUserCommutes()
         .subscribe((commutes: Commute[]) => this.authUserCommutes = commutes);
+
+      this.commutesService.getUserAsPassenger()
+        .subscribe((commutes: Commute[]) => this.authUserPassenger = commutes);
     }
 
     this.userService.getOne(this.userId)
