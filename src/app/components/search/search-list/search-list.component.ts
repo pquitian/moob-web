@@ -48,7 +48,7 @@ export class SearchListComponent implements OnInit {
         new Transition('scale', 500, TransitionDirection.In, () => console.log('Completed transition')));
   }
 
-  private isMine() {
+  isMine() {
     if (this.authId === this.commute.driver.id) {
       return true;
     } else {
