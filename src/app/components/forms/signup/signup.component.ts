@@ -20,7 +20,6 @@ export class SignupComponent {
   constructor(private userService: UserService, private router: Router) { }
 
   onSubmitSignUp(signupForm: FormGroup): void {
-    console.log(signupForm);
     if (signupForm.valid) {
       this.userService.create(this.user)
         .subscribe(()=> {

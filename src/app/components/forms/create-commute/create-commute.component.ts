@@ -86,7 +86,6 @@ export class CreateCommuteComponent implements OnInit, OnDestroy {
         this.vehicle =  user.vehicles[0];
         this.commute.vehicle = this.vehicle;
         this.authUser.vehicles.push(this.vehicle);
-        console.log('THIS VH -->', this.vehicle);
         this.commutesService.createCommute(this.commute)
         .subscribe((commute: Commute) => {
           commuteForm.reset();

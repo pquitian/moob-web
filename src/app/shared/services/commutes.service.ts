@@ -49,7 +49,6 @@ export class CommutesService extends BaseApiService {
   }
 
   createCommute(commute: Commute): Observable <Commute | ApiErrors> {
-    console.log('COMMUTEEEE -->', commute);
     return this.http.post<Commute>(CommutesService.API_SEARCH, commute,  BaseApiService.defaultOptions)
       .pipe(
         map((commute: Commute) => {

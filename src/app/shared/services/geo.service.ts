@@ -90,7 +90,6 @@ export class GeoService {
           geocoder.geocode(request, (results, status) => {
             if (status === google.maps.GeocoderStatus.OK && results[0] != null) {
                 const address = results[0].formatted_address.split(',')[0];
-                console.log('ADDRESS', address);
                 return resolve(address);
               }
                 throwError ('No address available');

@@ -34,7 +34,7 @@ export class VehiclesService extends BaseApiService {
         user = Object.assign(new User(), user);
         this.user = user;
         this.notifyUserChanges();
-        console.log('VH-->', user);
+
         return user;
       }),
       catchError(this.handleError)
