@@ -24,7 +24,7 @@ export class SessionComponent {
           sessionForm.reset();
           this.router.navigate(['search']);
         },
-          (error: ApiErrors) => this.apiError
+          (error: ApiErrors) => this.apiError = error
         );
     }
   }

@@ -10,7 +10,7 @@
         <!--Email errors-->
         <div class="ui error message" *ngIf="email.errors && email.touched && email.errors.required">
           Please, enter a valid email
-        </div>
+      </div>
         <!---->
       </div>
       <div class="field" [ngClass]="{ 'error' : apiError || password.errors && password.touched }">
@@ -23,6 +23,9 @@
           Please, enter you password
         </div>
         <!---->
+      </div>
+      <div class="ui error message" *ngIf="apiError">
+        {{ apiError.message }}
       </div>
       <button type="submit" class="ui fluid large teal submit button">Go!</button>
     </div>

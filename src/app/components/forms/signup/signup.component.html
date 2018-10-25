@@ -13,6 +13,9 @@
         <div class="ui error message" *ngIf="name.errors && name.touched && name.errors.required">
           We need your name :)
         </div>
+        <div class="ui error message" *ngIf="apiError">
+          {{ apiError.message }}
+        </div>
         <!---->
       </div>
 
@@ -25,6 +28,9 @@
         <div class="ui error message" *ngIf="email.errors && email.touched && email.errors.required">
           Please, write a valid email
         </div>
+        <div class="ui error message" *ngIf="apiError">
+          {{ apiError.message }}
+        </div>
         <!---->
       </div>
 
@@ -36,6 +42,9 @@
         <!--Password errors-->
         <div class="ui error message" *ngIf="password.errors && password.touched && password.errors.required">
           Choose a password
+        </div>
+        <div class="ui error message" *ngIf="apiError">
+          {{ apiError.message }}
         </div>
         <!---->
       </div>
